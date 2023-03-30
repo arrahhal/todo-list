@@ -4,11 +4,11 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build:sass": "sass  --no-source-map src/sass:dist/css",
+    "build:sass": "sass  --no-source-map src/sass/style.scss:dist/style.css",
     "copy:html": "copyfiles -u 1 ./src/*.html dist",
     "copy": "npm-run-all --parallel copy:*",
     "watch:html": "onchange 'src/*.html' -- npm run copy:html",
-    "watch:sass": "sass  --no-source-map --watch src/sass:dist/css",
+    "watch:sass": "sass  --no-source-map --watch src/sass/style.scss:dist/style.css",
     "watch:webpack": "webpack --watch",
     "watch": "npm-run-all --parallel watch:*",
     "serve": "browser-sync start --server dist --files dist",
