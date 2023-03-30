@@ -1,0 +1,26 @@
+@use '../abstracts/' as *;
+
+.header-container {
+  position: relative;
+  z-index: 9;
+  display: flex;
+  border-bottom: 1px solid $clr-base-light;
+  padding: 0.125rem;
+  background-color: $clr-black;
+  color: $clr-white;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+  font-size: $fs-xl;
+  text-transform: uppercase;
+  font-weight: $fw-bold;
+}
+
+.logo-icon {
+  width: 4rem;
+  margin-inline-end: 0.25rem;
+  fill: $clr-white;
+}

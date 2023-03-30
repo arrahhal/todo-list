@@ -1,0 +1,17 @@
+@use './colors' as *;
+
+/* font sizing */
+$fs-base: 1.25rem;
+$fs-lg: 1.875rem;
+$fs-xl: 2.25rem;
+
+/* font families */
+$ff-roboto: 'Roboto', sans-serif;
+$ff-montserrat: 'Montserrat', sans-serif;
+
+/* letter spacing */
+$ls-1: 0.05em;
+
+/* font weight */
+$fw-normal: 400;
+$fw-bold: 600;

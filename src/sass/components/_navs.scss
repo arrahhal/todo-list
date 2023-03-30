@@ -1,0 +1,20 @@
+@use '../abstracts/' as *;
+
+.default-projects-list {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 1rem;
+}
+
+.user-projects-list {
+  height: 0;
+  overflow-y: hidden;
+  display: grid;
+  padding-top: 0.5rem;
+  gap: 1rem;
+  grid-template-areas: 'addNewProjectBtn';
+}
+
+.user-projects.expanded .user-projects-list {
+  height: auto;
+}

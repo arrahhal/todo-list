@@ -1,0 +1,16 @@
+@use '../abstracts/' as *;
+
+.btn {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  font-weight: $fw-bold;
+  cursor: pointer;
+}
+
+.reset-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}

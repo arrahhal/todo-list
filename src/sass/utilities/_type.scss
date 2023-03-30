@@ -1,0 +1,41 @@
+@use '../abstracts' as *;
+
+/* font sizing */
+.text-base {
+  font-size: $fs-base;
+}
+.text-lg {
+  font-size: $fs-lg;
+}
+.text-xl {
+  font-size: $fs-xl;
+}
+
+/* text colors */
+.text-black {
+  color: $clr-black;
+}
+.text-white {
+  color: $clr-white;
+}
+
+/* font families */
+.ff-roboto {
+  font-family: $ff-roboto;
+}
+.ff-montserrat {
+  font-family: $ff-montserrat;
+}
+
+/* letter spacing */
+.letter-spacing-1 {
+  letter-spacing: $ls-1;
+}
+
+/* font weights */
+.fw-normal {
+  font-weight: $fw-normal;
+}
+.fw-bold {
+  font-weight: $fw-bold;
+}
