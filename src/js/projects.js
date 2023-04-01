@@ -6,20 +6,22 @@ export const createProject = (pTitle) => {
   function updateProject(newTitle) {
     title = newTitle;
   }
-  function addTask(newTask) {
+  const addTask = (newTask) => {
     tasks.push(newTask);
-  }
+  };
   function removeTask(taskId) {
     tasks = tasks.filter((task) => task.id !== taskId);
   }
-  const listTasks = () => tasks;
+
+  const getTasks = () => tasks;
+
   return {
     title,
     id,
     updateProject,
     addTask,
     removeTask,
-    listTasks,
+    getTasks,
   };
 };
 
@@ -36,10 +38,12 @@ export const Inbox = (() => {
     tasks = tasks.filter((task) => task.id !== taskId);
   };
 
+  const getTasks = () => tasks;
+
   return {
     title,
     id,
-    tasks,
+    getTasks,
     addTask,
     removeTask,
   };

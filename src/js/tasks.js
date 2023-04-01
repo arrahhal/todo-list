@@ -1,19 +1,17 @@
-const createTask = (
+export default function createTask(
   tTitle = '',
   tDesc = '',
   tPriority = '',
-  tDueDate = '',
-  tCompleted = false,
-  tProjectId = 0
-) => {
+  tDueDate = Date.now(),
+  tProjectId = ''
+) {
   let title = tTitle;
   let desc = tDesc;
   let priority = tPriority;
   let dueDate = tDueDate;
-  let completed = tCompleted;
+  let isCompleted = false;
   const projectId = tProjectId;
-  const id = Date.now().toString();
-  console.log(id);
+  const id = Math.floor(Math.random() * Date.now()).toString();
 
   const updateTask = (
     newTitle,
@@ -26,18 +24,16 @@ const createTask = (
     desc = newDesc;
     priority = newPriority;
     dueDate = newDueDate;
-    completed = newCompleted;
+    isCompleted = newCompleted;
   };
   return {
     title,
     desc,
     priority,
     dueDate,
-    completed,
+    isCompleted,
     id,
     projectId,
     updateTask,
   };
-};
-
-export default createTask;
+}
