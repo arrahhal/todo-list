@@ -4,23 +4,14 @@
   grid-area: addNewProjectBtn;
   text-align: left;
 }
-.user-projects.expanded .user-projects-toggle-arrow {
-  transform: rotate(90deg);
-}
 
-.project-button {
+.default-project {
   padding-block: 0.25rem;
   width: 100%;
-
-  &:hover {
-    background: $clr-base;
-  }
 }
 
-.user-project {
-  &:hover {
-    background-color: $clr-base-light;
-    border: none;
-    border-radius: 5px;
-  }
+.current-project {
+  background-color: $clr-base;
+  border: none;
+  border-radius: 5px;
 }

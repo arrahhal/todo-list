@@ -15,6 +15,18 @@
   grid-template-areas: 'addNewProjectBtn';
 }
 
-.user-projects.expanded .user-projects-list {
+.user-projects-nav.expanded .user-projects-list {
   height: auto;
+}
+
+.user-projects-nav.expanded .user-projects-toggle-arrow {
+  transform: rotate(90deg);
+}
+
+.project:hover,
+.task-list:hover,
+.current-focus {
+  background-color: $clr-base;
+  border: none;
+  border-radius: 5px;
 }

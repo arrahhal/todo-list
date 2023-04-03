@@ -13,10 +13,9 @@
   gap: 1rem;
 }
 .task {
-  border-radius: 5px;
-  background-color: $clr-base;
-  color: $clr-white;
+  color: $clr-black;
   padding: 0.5rem 1rem;
+  border-bottom: 1px solid $clr-black;
   display: flex;
   justify-content: space-between;
 }
@@ -33,6 +32,10 @@
   fill: $clr-base-light;
 
   &:hover {
-    fill: $clr-white;
+    fill: $clr-black;
   }
+}
+.task-date {
+  font-style: italic;
+  color: $clr-base;
 }
