@@ -14,5 +14,6 @@
     "no-unused-vars": "warn",
     "no-console": "off",
     "func-names": "off"
-  }
+  },
+  "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
 }
