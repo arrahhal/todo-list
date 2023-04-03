@@ -1,78 +1,85 @@
 import { isThisWeek, isToday } from 'date-fns';
 import { Inbox, createProject } from './projects';
 
-export default function todoController() {
-  const todoProjects = [];
+const todoController = () => {
+  const projects = [];
 
+  // Set up the default projects
   const setDefaultProjects = () => {
-    todoProjects.push(Inbox);
+    projects.push(Inbox);
   };
-
   setDefaultProjects();
 
-  const addProject = (title) => todoProjects.push(createProject(title));
+  // Add a new project with the given title
+  const addProject = (title) => projects.push(createProject(title));
 
-  const getProjectIndex = (projectId) =>
-    todoProjects.findIndex((project) => project.id === projectId);
+  // Find the index of a project with the given ID
+  const findProjectIndex = (projectId) =>
+    projects.findIndex((project) => project.id === projectId);
 
+  // Remove a project with the given ID
   const removeProject = (projectId) => {
-    const projectIndex = getProjectIndex(projectId);
-    if (projectIndex > -1) todoProjects.splice(projectIndex, 1);
+    const projectIndex = findProjectIndex(projectId);
+    if (projectIndex > -1) projects.splice(projectIndex, 1);
   };
 
+  // Update the title of a project with the given ID
   const updateProject = (newTitle, projectId) => {
-    const projectIndex = getProjectIndex(projectId);
-    if (projectIndex > -1) todoProjects[projectIndex].title = newTitle;
+    const projectIndex = findProjectIndex(projectId);
+    if (projectIndex > -1) projects[projectIndex].title = newTitle;
   };
 
+  // Add a task to a project with the given ID
   const addTaskToProject = (task, projectId) => {
-    const projectIndex = getProjectIndex(projectId);
-    todoProjects[projectIndex].addTask(task);
+    const projectIndex = findProjectIndex(projectId);
+    projects[projectIndex].addTask(task);
   };
 
-  const getAllTasks = () => {
-    const tasks = [];
-    for (let i = 0; i < todoProjects.length; i += 1) {
-      const projectTasks = todoProjects[i].getTasks;
-      for (let j = 0; j < projectTasks.length; i += 1) {
-        tasks.push(projectTasks[j]);
-      }
-    }
-    return tasks;
-  };
+  // Get all tasks from all projects
+  const getAllTasks = () => projects.flatMap((project) => project.getTasks());
 
+  // Remove a task with the given ID from its project
   const removeTaskFromProject = (targetTaskId) => {
     const allTasks = getAllTasks();
     const targetTaskIndex = allTasks.findIndex(
       (task) => task.id === targetTaskId
     );
     const targetTaskProjectId = allTasks[targetTaskIndex].projectId;
-    const targetTaskProject =
-      todoProjects[getProjectIndex(targetTaskProjectId)];
+    const targetTaskProject = projects[findProjectIndex(targetTaskProjectId)];
     targetTaskProject.removeTask(targetTaskId);
   };
 
+  // Get all tasks due today
   const getTodayTasks = () =>
     getAllTasks().filter((task) => isToday(task.dueDate));
+
+  // Get all tasks due this week
   const getThisWeekTasks = () =>
     getAllTasks().filter((task) => isThisWeek(task.dueDate));
+
+  // Get all completed tasks
   const getCompletedTasks = () =>
     getAllTasks().filter((task) => task.isCompleted);
+
+  // Get all tasks in the project with the given ID
   const getProjectTasks = (projectId) =>
-    todoProjects.find((project) => project.projectId === projectId);
+    projects[findProjectIndex(projectId)].getTasks();
+
+  // Get all projects
+  const getProjects = () => projects;
 
   return {
-    todoProjects,
-    getProjectIndex,
+    getProjects,
     addProject,
     removeProject,
     updateProject,
     addTaskToProject,
-    getAllTasks,
     removeTaskFromProject,
     getTodayTasks,
     getThisWeekTasks,
     getCompletedTasks,
     getProjectTasks,
   };
-}
+};
+
+export default todoController;
