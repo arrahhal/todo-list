@@ -12,9 +12,7 @@ export default function createTask(
   const title = typeof tTitle === 'string' ? tTitle.trim() : '';
   const desc = typeof tDesc === 'string' ? tDesc.trim() : '';
   const priority = typeof tPriority === 'string' ? tPriority.trim() : '';
-  const dueDate = isValid(parseISO(tDueDate))
-    ? tDueDate
-    : new Date().toISOString();
+  const dueDate = isValid(tDueDate) ? tDueDate : new Date().now();
   const projectId = typeof tProjectId === 'string' ? tProjectId.trim() : '';
 
   // Generate unique task ID
