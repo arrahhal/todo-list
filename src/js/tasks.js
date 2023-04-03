@@ -1,18 +1,26 @@
+import { isValid, parseISO } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
+
 export default function createTask(
   tTitle = '',
   tDesc = '',
   tPriority = '',
-  tDueDate = Date.now(),
-  tProjectId = ''
+  tDueDate = new Date().toISOString(),
+  tProjectId = '1'
 ) {
-  let title = tTitle;
-  let desc = tDesc;
-  let priority = tPriority;
-  let dueDate = tDueDate;
-  let isCompleted = false;
-  const projectId = tProjectId;
-  const id = Math.floor(Math.random() * Date.now()).toString();
+  // Validate and format input parameters
+  const title = typeof tTitle === 'string' ? tTitle.trim() : '';
+  const desc = typeof tDesc === 'string' ? tDesc.trim() : '';
+  const priority = typeof tPriority === 'string' ? tPriority.trim() : '';
+  const dueDate = isValid(parseISO(tDueDate))
+    ? tDueDate
+    : new Date().toISOString();
+  const projectId = typeof tProjectId === 'string' ? tProjectId.trim() : '';
 
+  // Generate unique task ID
+  const id = uuidv4();
+
+  // Define updateTask method
   const updateTask = (
     newTitle,
     newDesc,
@@ -20,20 +28,49 @@ export default function createTask(
     newDueDate,
     newCompleted
   ) => {
-    title = newTitle;
-    desc = newDesc;
-    priority = newPriority;
-    dueDate = newDueDate;
-    isCompleted = newCompleted;
+    // Validate and format input parameters
+    const updatedTitle = typeof newTitle === 'string' ? newTitle.trim() : title;
+    const updatedDesc = typeof newDesc === 'string' ? newDesc.trim() : desc;
+    const updatedPriority =
+      typeof newPriority === 'string' ? newPriority.trim() : priority;
+    const updatedDueDate = isValid(parseISO(newDueDate)) ? newDueDate : dueDate;
+    const updatedCompleted =
+      typeof newCompleted === 'boolean' ? newCompleted : isCompleted;
+
+    // Update task properties
+    title = updatedTitle;
+    desc = updatedDesc;
+    priority = updatedPriority;
+    dueDate = updatedDueDate;
+    isCompleted = updatedCompleted;
   };
-  return {
-    title,
-    desc,
-    priority,
-    dueDate,
-    isCompleted,
-    id,
-    projectId,
+
+  // Define task object
+  let isCompleted = false;
+  const task = {
+    get title() {
+      return title;
+    },
+    get desc() {
+      return desc;
+    },
+    get priority() {
+      return priority;
+    },
+    get dueDate() {
+      return dueDate;
+    },
+    get isCompleted() {
+      return isCompleted;
+    },
+    get id() {
+      return id;
+    },
+    get projectId() {
+      return projectId;
+    },
     updateTask,
   };
+
+  return task;
 }
