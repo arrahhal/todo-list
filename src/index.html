@@ -2,36 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link class="default-projects-item" rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.css" />
 
     <title>Todo List</title>
   </head>
   <body>
     <header class="header-container">
       <button class="sidebar-toggle reset-btn btn">
-        <svg
-          class="sidebar-toggle-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-
-          <g id="SVGRepo_iconCarrier">
+        <svg class="sidebar-toggle-icon" viewBox="0 0 24 24" fill="none">
+          <g stroke-width="0" />
+          <g stroke-linecap="round" stroke-linejoin="round" />
+          <g>
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -41,21 +29,12 @@
         </svg>
       </button>
       <div class="logo-container">
-        <svg
-          class="logo-icon"
-          fill="none"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <svg class="logo-icon" fill="none" viewBox="0 0 24 24">
+          <g stroke-width="0" />
 
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+          <g stroke-linecap="round" stroke-linejoin="round" />
 
-          <g id="SVGRepo_iconCarrier">
+          <g>
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -70,52 +49,39 @@
       <div class="sidebar-container">
         <nav class="default-projects">
           <ul role="list" class="default-projects-list">
-            <li class="default-projects-item">
-              <button id="inbox-project" class="project-button reset-btn btn">
+            <li id="inbox-project" class="project" data-id="1">
+              <button class="default-project reset-btn btn">
                 <svg
                   class="default-projects-icon"
                   fill="none"
                   viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <g id="SVGRepo_iconCarrier">
+                  <g stroke-width="0" />
+                  <g stroke-linecap="round" stroke-linejoin="round" />
+                  <g>
                     <path
                       fill-rule="evenodd"
                       clip-rule="evenodd"
                       d="M5 4C4.44772 4 4 4.44772 4 5V12H9C9.55228 12 10 12.4477 10 13V13.1C10 14.1493 10.8507 15 11.9 15H12.1C13.1493 15 14 14.1493 14 13.1V13C14 12.4477 14.4477 12 15 12H20V5C20 4.44772 19.5523 4 19 4H5ZM20 14H15.8956C15.4893 15.72 13.9441 17 12.1 17H11.9C10.0559 17 8.51066 15.72 8.10436 14H4V19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19V14ZM2 5C2 3.34315 3.34315 2 5 2H19C20.6569 2 22 3.34315 22 5V13V19C22 20.6569 20.6569 22 19 22H5C3.34315 22 2 20.6569 2 19V13V5Z"
-                      fill="#ffffff"
                     />
                   </g>
                 </svg>
                 <p>Inbox</p>
               </button>
             </li>
-            <li class="default-projects-item">
-              <button id="today-project" class="project-button reset-btn btn">
+            <li id="today-list" class="task-list">
+              <button class="default-project reset-btn btn">
                 <svg
                   class="default-projects-icon"
                   viewBox="0 0 24 24"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <g id="SVGRepo_iconCarrier">
-                    <g id="Environment / Sun">
+                  <g stroke-width="0" />
+                  <g stroke-linecap="round" stroke-linejoin="round" />
+                  <g>
+                    <g>
                       <path
-                        id="Vector"
                         d="M12 4V2M12 20V22M6.41421 6.41421L5 5M17.728 17.728L19.1422 19.1422M4 12H2M20 12H22M17.7285 6.41421L19.1427 5M6.4147 17.728L5.00049 19.1422M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z"
-                        stroke="#ffffff"
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -126,56 +92,57 @@
                 <p>Today</p>
               </button>
             </li>
-            <li class="default-projects-item">
-              <button id="week-project" class="project-button reset-btn btn">
+            <li class="task-list" id="week-list">
+              <button class="default-project reset-btn btn">
                 <svg
                   class="default-projects-icon"
                   viewBox="0 0 24 24"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-
-                  <g id="SVGRepo_iconCarrier">
+                  <g stroke-width="0" />
+                  <g stroke-linecap="round" stroke-linejoin="round" />
+                  <g>
                     <path
                       d="M12.0762 17L15.9248 8.1543V7.04688H8.89746V8.64648H13.8467L9.99121 17H12.0762Z"
-                      fill="#ffffff"
                     />
                     <path
                       fill-rule="evenodd"
                       clip-rule="evenodd"
                       d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z"
-                      fill="#ffffff"
                     />
                   </g>
                 </svg>
                 <p>Week</p>
               </button>
             </li>
+            <li id="completed-list" class="task-list">
+              <button class="default-project reset-btn btn">
+                <svg
+                  class="default-projects-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <g stroke-width="0"></g>
+                  <g stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g>
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M6 3C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6ZM17.8 8.6C18.1314 8.15817 18.0418 7.53137 17.6 7.2C17.1582 6.86863 16.5314 6.95817 16.2 7.4L10.8918 14.4776L8.70711 12.2929C8.31658 11.9024 7.68342 11.9024 7.29289 12.2929C6.90237 12.6834 6.90237 13.3166 7.29289 13.7071L10.2929 16.7071C10.4979 16.9121 10.7817 17.018 11.0709 16.9975C11.3601 16.9769 11.6261 16.8319 11.8 16.6L17.8 8.6Z"
+                    ></path>
+                  </g>
+                </svg>
+                <p>Completed</p>
+              </button>
+            </li>
           </ul>
         </nav>
-        <nav class="user-projects expanded">
+        <nav class="user-projects-nav expanded">
           <button class="user-projects-toggle reset-btn btn">
-            <svg
-              class="user-projects-toggle-arrow"
-              viewBox="0 0 1024 1024"
-              class="icon"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
+            <svg class="user-projects-toggle-arrow" viewBox="0 0 1024 1024">
+              <g stroke-width="0"></g>
+              <g stroke-linecap="round" stroke-linejoin="round"></g>
+              <g>
                 <path
                   d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
                 ></path>
@@ -194,7 +161,18 @@
           </ul>
         </nav>
       </div>
-      <div class="content-container"></div>
+      <div class="content-container">
+        <h1 class="current-project-title">Inbox</h1>
+        <div class="tasks-container container">
+          <nav>
+            <ul
+              id="project-items-list"
+              role="list"
+              class="project-items-list"
+            ></ul>
+          </nav>
+        </div>
+      </div>
     </main>
     <script src="./main.js"></script>
   </body>
