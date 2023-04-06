@@ -5,13 +5,21 @@ const uiController = () => {
   const projectItemsList = document.getElementById('project-items-list');
   const allProjects = document.querySelectorAll('.project');
   const allLists = document.querySelectorAll('.task-list');
+  const currentProjectTitle = document.querySelector('#current-project-title');
+  const today = document.getElementById('today-list');
+  const week = document.getElementById('week-list');
+  const completed = document.getElementById('completed-list');
+  const currentProjectId = '1';
+  const addTaskBtn = document.getElementById('add-task-button');
 
   const clearCurrentFocus = () => {
     allProjects.forEach((project) => project.classList.remove('current-focus'));
     allLists.forEach((list) => list.classList.remove('current-focus'));
   };
-  const setCurrentFocus = (projectsItem) =>
+  const setCurrentProjectFocus = (projectsItem) => {
+    clearCurrentFocus();
     projectsItem.classList.add('current-focus');
+  };
 
   const createSvg = (shape) => {
     const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -82,30 +90,56 @@ const uiController = () => {
     return taskListItem;
   };
   const displayCurrentProject = (projectId) => {
-    projectItemsList.textContent = '';
     const projectTasks = todoController().getProjectTasks(projectId);
-    projectTasks.forEach((task) =>
+    appendTasksList(projectTasks);
+  };
+
+  const appendTasksList = (tasksList) => {
+    projectItemsList.textContent = '';
+    tasksList.forEach((task) =>
       projectItemsList.append(
         createTaskListItem(task.title, task.dueDate, task.id)
       )
     );
   };
 
-  allLists.forEach((list) =>
-    list.addEventListener('click', (e) => {
-      e.stopPropagation();
-      clearCurrentFocus();
-      list.classList.add('current-focus');
-    })
-  );
+  const displayTodayTasks = () => {
+    const todayTasks = todoController().getTodayTasks();
+    appendTasksList(todayTasks);
+  };
+  today.addEventListener('click', displayTodayTasks);
 
+  const displayWeekTasks = () => {
+    const weekTasks = todoController().getThisWeekTasks();
+    appendTasksList(weekTasks);
+  };
+  week.addEventListener('click', displayWeekTasks);
+
+  const displayCompletedTasks = () => {
+    const completedTasks = todoController().getCompletedTasks();
+    appendTasksList(completedTasks);
+  };
+  completed.addEventListener('click', displayCompletedTasks);
+
+  const setCurrentProjectTitle = (project) => {
+    currentProjectTitle.textContent = project.textContent.trim();
+  };
+
+  const setCurrentProject = (project) => {
+    setCurrentProjectFocus(project);
+    setCurrentProjectTitle(project);
+    displayCurrentProject(project.dataset.id);
+  };
+  const setCurrentList = (list) => {
+    setCurrentProjectFocus(list);
+    setCurrentProjectTitle(list);
+  };
+
+  allLists.forEach((list) =>
+    list.addEventListener('click', () => setCurrentList(list))
+  );
   allProjects.forEach((project) =>
-    project.addEventListener('click', (e) => {
-      e.stopPropagation();
-      clearCurrentFocus();
-      setCurrentFocus(project);
-      displayCurrentProject(project.dataset.id);
-    })
+    project.addEventListener('click', () => setCurrentProject(project))
   );
 };
 
