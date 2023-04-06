@@ -9,7 +9,7 @@ const uiController = () => {
   const today = document.getElementById('today-list');
   const week = document.getElementById('week-list');
   const completed = document.getElementById('completed-list');
-  const currentProjectId = '1';
+  let currentProjectId = '1';
   const addTaskBtn = document.getElementById('add-task-button');
 
   const clearCurrentFocus = () => {
@@ -75,6 +75,8 @@ const uiController = () => {
     const optionsContainer = document.createElement('div');
     const editIcon = createSvg('edit');
     const removeIcon = createSvg('remove');
+    editIcon.dataset.taskId = id;
+    removeIcon.dataset.taskId = id;
     optionsContainer.append(editIcon, removeIcon);
 
     const dateParagraph = document.createElement('div');
@@ -90,7 +92,7 @@ const uiController = () => {
     return taskListItem;
   };
   const displayCurrentProject = (projectId) => {
-    const projectTasks = todoController().getProjectTasks(projectId);
+    const projectTasks = todoController.getProjectTasks(projectId);
     appendTasksList(projectTasks);
   };
 
@@ -104,19 +106,19 @@ const uiController = () => {
   };
 
   const displayTodayTasks = () => {
-    const todayTasks = todoController().getTodayTasks();
+    const todayTasks = todoController.getTodayTasks();
     appendTasksList(todayTasks);
   };
   today.addEventListener('click', displayTodayTasks);
 
   const displayWeekTasks = () => {
-    const weekTasks = todoController().getThisWeekTasks();
+    const weekTasks = todoController.getThisWeekTasks();
     appendTasksList(weekTasks);
   };
   week.addEventListener('click', displayWeekTasks);
 
   const displayCompletedTasks = () => {
-    const completedTasks = todoController().getCompletedTasks();
+    const completedTasks = todoController.getCompletedTasks();
     appendTasksList(completedTasks);
   };
   completed.addEventListener('click', displayCompletedTasks);
@@ -134,6 +136,18 @@ const uiController = () => {
     setCurrentProjectFocus(list);
     setCurrentProjectTitle(list);
   };
+
+  const removeTask = (taskId) => {
+    todoController.removeTaskFromProject(taskId);
+    appendTasksList(todoController.getProjectTasks(currentProjectId));
+  };
+
+  projectItemsList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('task-remove'))
+      removeTask(e.target.dataset.taskId);
+    else if (e.target.classList.contains('task-edit'))
+      displayEditPanel(e.target.dataset.taskId);
+  });
 
   allLists.forEach((list) =>
     list.addEventListener('click', () => setCurrentList(list))

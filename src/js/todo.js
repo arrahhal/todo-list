@@ -2,7 +2,7 @@ import { isThisWeek, isToday } from 'date-fns';
 import { Inbox, createProject } from './projects';
 import createTask from './tasks';
 
-const todoController = () => {
+const todoController = (() => {
   const projects = [];
 
   // Set up the default projects
@@ -50,6 +50,13 @@ const todoController = () => {
     targetTaskProject.removeTask(targetTaskId);
   };
 
+  const loadDefaultInbox = () => {
+    Inbox.addTask(
+      createTask('task title', 'task desc', 'low', new Date(2023, 3, 6))
+    );
+  };
+  loadDefaultInbox();
+
   // Get all tasks due today
   const getTodayTasks = () =>
     getAllTasks().filter((task) => isToday(task.dueDate));
@@ -81,6 +88,6 @@ const todoController = () => {
     getCompletedTasks,
     getProjectTasks,
   };
-};
+})();
 
 export default todoController;
