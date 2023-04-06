@@ -1,10 +1,5 @@
 @use '../abstracts/' as *;
 
-.add-project-button {
-  grid-area: addNewProjectBtn;
-  text-align: left;
-}
-
 .default-project {
   padding-block: 0.25rem;
   width: 100%;
@@ -14,4 +9,12 @@
   background-color: $clr-base;
   border: none;
   border-radius: 5px;
+}
+
+.add-task-button {
+  display: flex;
+  justify-content: center;
+  background-color: $clr-base;
+  aspect-ratio: 1;
+  margin-inline-end: clamp(0.3rem, 0.7vw, 1rem);
 }
