@@ -1,23 +1,27 @@
 @use '../abstracts/' as *;
 
-.current-project-title {
-  padding-top: 1rem;
-  background-color: $clr-base-light;
-  text-align: center;
+.content-container {
+  margin: 1rem;
+  margin-inline: clamp(2rem, 3vw, 4rem);
+  flex: 1;
 }
-.tasks-container {
-  margin-top: 1rem;
+.current-project-title {
+  color: $clr-neutral-400;
+  border-bottom: 1px solid $clr-semi-neutral-400;
+  margin-bottom: 2rem;
 }
 .project-items-list {
   display: grid;
   gap: 1rem;
 }
 .task {
-  color: $clr-black;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid $clr-black;
   display: flex;
-  justify-content: space-between;
+  background-color: $clr-semi-neutral-400;
+  border-radius: 4px;
+}
+.task-checkbox-container {
+  flex: 1;
 }
 .task-checkbox {
   display: none;
@@ -29,13 +33,14 @@
 .task-option {
   width: 1.5rem;
   margin-inline-end: 0.25rem;
-  fill: $clr-base-light;
+  fill: $clr-neutral-400;
 
   &:hover {
-    fill: $clr-black;
+    fill: $clr-base-400;
   }
 }
 .task-date {
   font-style: italic;
-  color: $clr-base;
+  color: $clr-neutral-400;
+  font-size: $fs-sm;
 }

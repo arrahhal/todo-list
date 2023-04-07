@@ -4,6 +4,9 @@ body {
   font-size: $fs-base;
   font-weight: $fw-normal;
   font-family: $ff-roboto;
-  background-color: $clr-white;
-  color: $clr-black;
+  background-color: $clr-neutral-900;
+  color: $clr-neutral-100;
+}
+*::selection {
+  background-color: #ffa;
 }

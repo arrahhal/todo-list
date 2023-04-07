@@ -15,17 +15,9 @@
   </head>
   <body>
     <header class="header-container">
-      <button class="sidebar-toggle reset-btn btn">
-        <svg class="sidebar-toggle-icon" viewBox="0 0 24 24">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M5 7C5 6.44772 5.44772 6 6 6H18C18.5523 6 19 6.44772 19 7C19 7.55228 18.5523 8 18 8H6C5.44772 8 5 7.55228 5 7ZM5 12C5 11.4477 5.44772 11 6 11H18C18.5523 11 19 11.4477 19 12C19 12.5523 18.5523 13 18 13H6C5.44772 13 5 12.5523 5 12ZM5 17C5 16.4477 5.44772 16 6 16H18C18.5523 16 19 16.4477 19 17C19 17.5523 18.5523 18 18 18H6C5.44772 18 5 17.5523 5 17Z"
-          />
-        </svg>
-      </button>
+      <button class="sidebar-toggle btn"></button>
       <div class="logo-container">
-        <svg class="logo-icon" fill="none" viewBox="0 0 24 24">
+        <svg class="logo-icon" viewBox="0 0 24 24">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -34,84 +26,80 @@
         </svg>
         <p class="logo-txt">Do It</p>
       </div>
-      <button id="add-task-button" class="add-task-button reset-btn btn">
-        +
-      </button>
     </header>
     <main class="main-container">
-      <div class="sidebar-container">
+      <div class="sidebar-container open">
         <nav class="default-projects">
           <ul role="list" class="default-projects-list">
             <li id="inbox-project" class="project" data-id="1">
-              <button class="default-project reset-btn btn">
-                <svg class="default-projects-icon" viewBox="0 0 24 24">
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M5 4C4.44772 4 4 4.44772 4 5V12H9C9.55228 12 10 12.4477 10 13V13.1C10 14.1493 10.8507 15 11.9 15H12.1C13.1493 15 14 14.1493 14 13.1V13C14 12.4477 14.4477 12 15 12H20V5C20 4.44772 19.5523 4 19 4H5ZM20 14H15.8956C15.4893 15.72 13.9441 17 12.1 17H11.9C10.0559 17 8.51066 15.72 8.10436 14H4V19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19V14ZM2 5C2 3.34315 3.34315 2 5 2H19C20.6569 2 22 3.34315 22 5V13V19C22 20.6569 20.6569 22 19 22H5C3.34315 22 2 20.6569 2 19V13V5Z"
-                  />
-                </svg>
+              <button class="default-project btn">
+                <img
+                  class="default-projects-icon"
+                  src="./assets/icons/inbox-svgrepo-com.svg"
+                  alt="Inbox icon"
+                />
                 <p>Inbox</p>
               </button>
             </li>
             <li id="today-list" class="task-list">
-              <button class="default-project reset-btn btn">
-                <svg class="default-projects-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 4V2M12 20V22M6.41421 6.41421L5 5M17.728 17.728L19.1422 19.1422M4 12H2M20 12H22M17.7285 6.41421L19.1427 5M6.4147 17.728L5.00049 19.1422M12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+              <button class="default-project btn">
+                <img
+                  class="default-projects-icon"
+                  src="./assets/icons/sun-svgrepo-com.svg"
+                  alt="sun icon"
+                />
                 <p>Today</p>
               </button>
             </li>
             <li class="task-list" id="week-list">
-              <button class="default-project reset-btn btn">
-                <svg class="default-projects-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12.0762 17L15.9248 8.1543V7.04688H8.89746V8.64648H13.8467L9.99121 17H12.0762Z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z"
-                  />
-                </svg>
+              <button class="default-project btn">
+                <img
+                  class="default-projects-icon"
+                  src="./assets/icons/calendar-check-svgrepo-com.svg"
+                  alt="Calendar icon"
+                />
                 <p>Week</p>
               </button>
             </li>
             <li id="completed-list" class="task-list">
-              <button class="default-project reset-btn btn">
-                <svg class="default-projects-icon" viewBox="0 0 24 24">
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M6 3C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6ZM17.8 8.6C18.1314 8.15817 18.0418 7.53137 17.6 7.2C17.1582 6.86863 16.5314 6.95817 16.2 7.4L10.8918 14.4776L8.70711 12.2929C8.31658 11.9024 7.68342 11.9024 7.29289 12.2929C6.90237 12.6834 6.90237 13.3166 7.29289 13.7071L10.2929 16.7071C10.4979 16.9121 10.7817 17.018 11.0709 16.9975C11.3601 16.9769 11.6261 16.8319 11.8 16.6L17.8 8.6Z"
-                  ></path>
-                </svg>
+              <button class="default-project btn">
+                <img
+                  class="default-projects-icon"
+                  src="./assets/icons/archive-svgrepo-com.svg"
+                  alt="Archive icon"
+                />
                 <p>Completed</p>
               </button>
             </li>
           </ul>
         </nav>
-        <nav class="user-projects-nav expanded">
-          <details class="user-projects-details">
-            <summary>Projects list</summary>
-            <button
-              class="add-project-button reset-btn btn"
-              id="add-user-project"
-            >
-              + Add project
-            </button>
+        <div class="user-projects-container">
+          <button class="user-projects-button btn">
+            <img
+              class="default-projects-icon"
+              src="./assets/icons/folder-svgrepo-com.svg"
+              alt="folders"
+            />
+            <p>Projects list</p>
+          </button>
+          <button class="add-project-button btn" id="add-user-project">
+            <svg class="add-project-icon" viewBox="0 0 24 24" fill="none">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
+              />
+            </svg>
+          </button>
+          <nav class="user-projects-nav expanded">
             <ul role="list" class="user-projects-list"></ul>
-          </details>
-        </nav>
+          </nav>
+        </div>
       </div>
       <div class="content-container">
         <h1 id="current-project-title" class="current-project-title"></h1>
-        <div class="tasks-container container">
+        <button id="add-task-button" class="add-task-button btn"></button>
+        <div class="tasks-container">
           <nav>
             <ul
               id="project-items-list"
@@ -122,6 +110,62 @@
         </div>
       </div>
     </main>
+    <div class="new-task-screen display-none">
+      <div class="new-task-panel">
+        <p class="new-task-heading">New Task</p>
+        <form class="new-task-from" action="">
+          <div class="input-wrapper">
+            <label for="new-task-title">Title</label>
+            <input
+              type="text"
+              name="new-task-title"
+              id="new-task-title"
+              required
+            />
+          </div>
+          <div class="input-wrapper">
+            <label for="new-task-project">Project</label>
+            <select name="new-task-project" id="new-task-project"></select>
+          </div>
+          <div class="input-wrapper">
+            <label for="new-task-deuDate">Date</label
+            ><input
+              type="date"
+              name="new-task-deuDate"
+              id="new-task-deuDate"
+              required
+            />
+          </div>
+          <div class="input-wrapper">
+            <label for="new-task-priority">Priority</label
+            ><select name="new-task-priority" id="new-task-priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="input-wrapper desc-wrapper">
+            <label for="new-task-desc">Description</label
+            ><textarea
+              rows="3"
+              placeholder=""
+              id="new-task-desc"
+              class="new-task-desc"
+            ></textarea>
+          </div>
+          <button id="new-task-close" class="input-btn remove-task-button">
+            Close
+          </button>
+          <button
+            type="submit"
+            id="new-task-add"
+            class="input-btn add-task-button"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
     <script src="./main.js"></script>
   </body>
 </html>

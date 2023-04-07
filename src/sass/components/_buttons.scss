@@ -6,7 +6,7 @@
 }
 
 .current-project {
-  background-color: $clr-base;
+  background-color: $clr-base-400;
   border: none;
   border-radius: 5px;
 }
@@ -14,7 +14,20 @@
 .add-task-button {
   display: flex;
   justify-content: center;
-  background-color: $clr-base;
-  aspect-ratio: 1;
-  margin-inline-end: clamp(0.3rem, 0.7vw, 1rem);
+  align-items: center;
+  background-color: $clr-base-400;
+  width: 100%;
+}
+.add-project-button {
+  border: 1px solid $clr-secondary-400;
+  fill: $clr-secondary-400;
+  justify-content: center;
+  width: 100%;
+
+  &:hover {
+    background-color: $clr-secondary-400;
+  }
+  &:hover svg {
+    fill: $clr-neutral-900;
+  }
 }

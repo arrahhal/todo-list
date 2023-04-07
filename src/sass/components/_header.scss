@@ -4,10 +4,10 @@
   position: relative;
   z-index: 9;
   display: flex;
-  border-bottom: 1px solid $clr-base-light;
+  border-bottom: 1px solid $clr-base-400;
   padding: 0.125rem;
-  background-color: $clr-black;
-  color: $clr-white;
+  background-color: $clr-base-400;
+  color: $clr-neutral-900;
   font-family: $ff-montserrat;
 }
 
@@ -23,5 +23,5 @@
 .logo-icon {
   width: 4rem;
   margin-inline-end: 0.25rem;
-  fill: $clr-white;
+  fill: $clr-neutral-900;
 }

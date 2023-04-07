@@ -3,6 +3,12 @@
 .default-projects-icon {
   width: 1.75rem;
   margin-inline-end: 1rem;
-  fill: $clr-white;
-  stroke: $clr-white;
+}
+.add-project-icon {
+  width: 1.75rem;
+  fill: $clr-secondary-400;
+}
+.task-remove path,
+.task-edit path {
+  pointer-events: none;
 }

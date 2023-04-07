@@ -3,14 +3,9 @@
 .btn {
   display: flex;
   align-items: center;
-  border-radius: 5px;
-  font-weight: $fw-bold;
+  border-radius: 4px;
   cursor: pointer;
-}
-
-.reset-btn {
-  background: none;
   border: none;
+  background: none;
   color: inherit;
-  cursor: pointer;
 }

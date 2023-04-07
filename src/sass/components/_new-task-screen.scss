@@ -1,0 +1,79 @@
+@use '../abstracts/' as *;
+
+.new-task-screen {
+  position: absolute;
+  z-index: 9999999999;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: $clr-semi-neutral-400;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+.new-task-panel {
+  background-color: $clr-neutral-900;
+  padding: 2.5rem;
+  border-radius: 5px;
+}
+.new-task-heading {
+  font-size: $fs-xl;
+  font-weight: $fw-bold;
+  border-bottom: 1px solid #000;
+  margin-bottom: 1rem;
+}
+.new-task-from {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.desc-wrapper {
+  grid-column: 1 / 3;
+}
+.new-task-desc {
+  resize: vertical;
+  grid-column: 2fr;
+}
+input,
+select {
+  height: 2rem;
+}
+textarea,
+input,
+select {
+  padding-inline: 0.3rem;
+  border: none;
+  border-radius: 4px;
+  border: 1px solid $clr-neutral-100;
+  background-color: $clr-neutral-800;
+  min-height: 2rem;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+  border: 1px solid $clr-base-400;
+}
+
+.input-btn {
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 5px;
+}
+.input-btn:hover {
+  opacity: 0.9;
+}
+.display-none {
+  display: none;
+}
+.add-task-button {
+  background-color: $clr-secondary-400;
+  color: $clr-neutral-900;
+}
+.remove-task-button {
+  background-color: $clr-base-400;
+  color: $clr-neutral-900;
+}
