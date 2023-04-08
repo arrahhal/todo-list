@@ -7,8 +7,12 @@
 }
 .current-project-title {
   color: $clr-neutral-400;
+}
+.content-header-container {
+  justify-content: space-between;
   border-bottom: 1px solid $clr-semi-neutral-400;
-  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 .project-items-list {
   display: grid;

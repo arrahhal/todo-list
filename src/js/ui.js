@@ -1,7 +1,8 @@
 import { format } from 'date-fns';
+import createTask from './tasks';
 import todoController from './todo';
 
-const uiController = () => {
+export const uiController = (() => {
   const projectItemsList = document.getElementById('project-items-list');
   const allProjects = document.querySelectorAll('.project');
   const allLists = document.querySelectorAll('.task-list');
@@ -142,6 +143,10 @@ const uiController = () => {
     appendTasksList(todoController.getProjectTasks(currentProjectId));
   };
 
+  const reloadCurrentProject = () => {
+    displayCurrentProject(currentProjectId);
+  };
+
   projectItemsList.addEventListener('click', (e) => {
     if (e.target.classList.contains('task-remove'))
       removeTask(e.target.dataset.taskId);
@@ -155,6 +160,88 @@ const uiController = () => {
   allProjects.forEach((project) =>
     project.addEventListener('click', () => setCurrentProject(project))
   );
-};
 
-export default uiController;
+  return {
+    reloadCurrentProject,
+  };
+})();
+
+const taskPanel = (() => {
+  const addTaskScreen = document.getElementById('add-task-screen');
+  const addTaskPanel = document.getElementById('add-task-panel');
+  const closeButton = document.getElementById('close-task-button');
+  const addTaskContentButton = document.getElementById(
+    'content-add-task-button'
+  );
+  const addTaskBtn = document.getElementById('add-task-button');
+  const taskTitle = document.getElementById('task-title-input');
+  const taskDate = document.getElementById('task-date-input');
+  const taskProject = document.getElementById('task-projects-select');
+  const taskPriority = document.getElementById('task-priority-select');
+  const taskDescription = document.getElementById('task-desc-textarea');
+
+  const checkValidation = () => {
+    const inputs = document.querySelectorAll(
+      '.add-task-panel input, .add-task-panel select'
+    );
+    let isValid = true;
+    inputs.forEach((input) => {
+      if (input.value === '') {
+        input.parentElement.classList.add('invalid');
+        isValid = false;
+      } else input.parentElement.classList.remove('invalid');
+    });
+    return isValid;
+  };
+
+  const addTaskToProject = () => {
+    const task = createTask(
+      taskTitle.value,
+      taskDescription.value,
+      taskPriority.value,
+      taskDate.value
+    );
+    todoController.addTaskToProject(task, taskProject.value);
+    uiController.reloadCurrentProject();
+  };
+
+  const addProjectsOptions = () => {
+    const projects = todoController.getProjects();
+
+    projects.forEach((project) => {
+      const opt = document.createElement('option');
+      opt.value = project.id;
+      opt.textContent = project.title;
+      taskProject.appendChild(opt);
+    });
+  };
+  addProjectsOptions();
+
+  const resetPanel = () => {
+    taskTitle.value = '';
+    taskDescription.value = '';
+  };
+
+  const showPanel = () => {
+    addTaskScreen.classList.remove('display-none');
+  };
+  const hidePanel = () => {
+    addTaskScreen.classList.add('display-none');
+  };
+
+  addTaskBtn.addEventListener('click', (e) => {
+    if (checkValidation()) {
+      addTaskToProject();
+      resetPanel();
+      hidePanel();
+    }
+    e.preventDefault();
+  });
+
+  addTaskContentButton.addEventListener('click', showPanel);
+
+  closeButton.addEventListener('click', (e) => {
+    hidePanel();
+    e.preventDefault();
+  });
+})();

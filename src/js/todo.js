@@ -54,6 +54,9 @@ const todoController = (() => {
     Inbox.addTask(
       createTask('task title', 'task desc', 'low', new Date(2023, 3, 6))
     );
+    Inbox.addTask(
+      createTask('task title', 'task desc', 'low', new Date(2023, 3, 6))
+    );
   };
   loadDefaultInbox();
 

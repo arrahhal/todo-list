@@ -1,3 +1,1 @@
-import uiController from './ui';
-
-uiController();
+import { uiController } from './ui';

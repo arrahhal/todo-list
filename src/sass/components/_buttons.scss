@@ -10,22 +10,37 @@
   border: none;
   border-radius: 5px;
 }
+.content-add-task-button {
+  border: 2px solid $clr-semi-accent;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
 
-.add-task-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $clr-base-400;
-  width: 100%;
+  &:hover {
+    background-color: $clr-semi-accent;
+  }
 }
+
 .add-project-button {
-  border: 1px solid $clr-secondary-400;
-  fill: $clr-secondary-400;
+  border: 1px solid $clr-accent;
+  fill: $clr-accent;
   justify-content: center;
   width: 100%;
 
   &:hover {
-    background-color: $clr-secondary-400;
+    background-color: $clr-accent;
+  }
+  &:hover svg {
+    fill: $clr-neutral-900;
+  }
+}
+
+.content-add-task-button {
+  border: 1px solid $clr-accent;
+  fill: $clr-accent;
+  justify-content: center;
+
+  &:hover {
+    background-color: $clr-accent;
   }
   &:hover svg {
     fill: $clr-neutral-900;

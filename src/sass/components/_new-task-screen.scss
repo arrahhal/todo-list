@@ -1,6 +1,6 @@
 @use '../abstracts/' as *;
 
-.new-task-screen {
+.add-task-screen {
   position: absolute;
   z-index: 9999999999;
   width: 100%;
@@ -11,23 +11,25 @@
   justify-content: center;
   align-items: center;
 }
-.new-task-panel {
+.add-task-panel {
   background-color: $clr-neutral-900;
   padding: 2.5rem;
+  width: min(100vw - 4rem, 45rem);
   border-radius: 5px;
 }
-.new-task-heading {
+.add-task-heading {
   font-size: $fs-xl;
   font-weight: $fw-bold;
   border-bottom: 1px solid #000;
   margin-bottom: 1rem;
 }
-.new-task-from {
+.add-task-from {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 .input-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -45,19 +47,22 @@ select {
 textarea,
 input,
 select {
-  padding-inline: 0.3rem;
-  border: none;
+  width: 100%;
+  padding: 0.3rem 0.5rem;
   border-radius: 4px;
-  border: 1px solid $clr-neutral-100;
+  border: 1px solid $clr-semi-neutral-400;
+  font-size: $fs-base;
   background-color: $clr-neutral-800;
-  min-height: 2rem;
+  min-height: 2.5rem;
 }
 textarea:focus,
 input:focus {
   outline: none;
   border: 1px solid $clr-base-400;
 }
-
+textarea {
+  resize: vertical;
+}
 .input-btn {
   padding: 0.2rem 1rem;
   border: none;
@@ -70,10 +75,26 @@ input:focus {
   display: none;
 }
 .add-task-button {
-  background-color: $clr-secondary-400;
+  background-color: $clr-accent;
   color: $clr-neutral-900;
 }
 .remove-task-button {
   background-color: $clr-base-400;
   color: $clr-neutral-900;
+}
+.required {
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.invalid::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(./assets/icons/alert-svgrepo-com.svg);
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  // transform: translateY(-50%);
+  z-index: 1;
 }

@@ -9,6 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="shortcut icon"
+      href="./assets/icons/favicon.svg"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="./style.css" />
 
     <title>Todo List</title>
@@ -82,7 +87,7 @@
             />
             <p>Projects list</p>
           </button>
-          <button class="add-project-button btn" id="add-user-project">
+          <button class="add-project-button btn flex" id="add-user-project">
             <svg class="add-project-icon" viewBox="0 0 24 24" fill="none">
               <path
                 fill-rule="evenodd"
@@ -97,68 +102,94 @@
         </div>
       </div>
       <div class="content-container">
-        <h1 id="current-project-title" class="current-project-title"></h1>
-        <button id="add-task-button" class="add-task-button btn"></button>
+        <div class="content-header-container flex">
+          <h1 id="current-project-title" class="current-project-title"></h1>
+          <button
+            id="content-add-task-button"
+            class="content-add-task-button btn flex"
+            title="Add new task"
+          >
+            <svg class="add-project-icon" viewBox="0 0 24 24" fill="none">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
+              />
+            </svg>
+          </button>
+        </div>
         <div class="tasks-container">
           <nav>
             <ul
               id="project-items-list"
               role="list"
-              class="project-items-list"
+              class="project-items-list container"
             ></ul>
           </nav>
         </div>
       </div>
     </main>
-    <div class="new-task-screen display-none">
-      <div class="new-task-panel">
-        <p class="new-task-heading">New Task</p>
-        <form class="new-task-from" action="">
+    <div id="add-task-screen" class="add-task-screen">
+      <div id="add-task-panel" class="add-task-panel">
+        <p class="add-task-heading">New Task</p>
+        <form class="add-task-from" action="">
           <div class="input-wrapper">
-            <label for="new-task-title">Title</label>
-            <input
-              type="text"
-              name="new-task-title"
-              id="new-task-title"
-              required
-            />
+            <label for="add-task-title">Title</label>
+            <div class="required">
+              <input
+                class=""
+                type="text"
+                name="add-task-title"
+                id="task-title-input"
+              />
+            </div>
           </div>
           <div class="input-wrapper">
-            <label for="new-task-project">Project</label>
-            <select name="new-task-project" id="new-task-project"></select>
+            <label for="add-task-project">Project</label>
+            <div class="required">
+              <select
+                name="add-task-project"
+                id="task-projects-select"
+                required
+              ></select>
+            </div>
           </div>
           <div class="input-wrapper">
-            <label for="new-task-deuDate">Date</label
-            ><input
-              type="date"
-              name="new-task-deuDate"
-              id="new-task-deuDate"
-              required
-            />
+            <label for="add-task-deuDate">Date</label>
+            <div class="required">
+              <input
+                type="date"
+                name="add-task-deuDate"
+                id="task-date-input"
+                required
+              />
+            </div>
           </div>
           <div class="input-wrapper">
-            <label for="new-task-priority">Priority</label
-            ><select name="new-task-priority" id="new-task-priority">
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
+            <label for="add-task-priority">Priority</label>
+            <div class="required">
+              <select name="add-task-priority" id="task-priority-select">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
           </div>
           <div class="input-wrapper desc-wrapper">
-            <label for="new-task-desc">Description</label
+            <label for="add-task-desc">Description</label
             ><textarea
               rows="3"
               placeholder=""
-              id="new-task-desc"
-              class="new-task-desc"
+              id="task-desc-textarea"
+              class="add-task-desc"
             ></textarea>
           </div>
-          <button id="new-task-close" class="input-btn remove-task-button">
+          <button id="close-task-button" class="input-btn remove-task-button">
             Close
           </button>
           <button
             type="submit"
-            id="new-task-add"
+            id="add-task-button"
             class="input-btn add-task-button"
           >
             Add
