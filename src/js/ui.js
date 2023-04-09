@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import createTask from './tasks';
 import todoController from './todo';
 
@@ -150,8 +150,6 @@ export const uiController = (() => {
   projectItemsList.addEventListener('click', (e) => {
     if (e.target.classList.contains('task-remove'))
       removeTask(e.target.dataset.taskId);
-    else if (e.target.classList.contains('task-edit'))
-      displayEditPanel(e.target.dataset.taskId);
   });
 
   allLists.forEach((list) =>
@@ -174,11 +172,15 @@ const taskPanel = (() => {
     'content-add-task-button'
   );
   const addTaskBtn = document.getElementById('add-task-button');
+  const updateTaskBtn = document.getElementById('update-task-button');
   const taskTitle = document.getElementById('task-title-input');
   const taskDate = document.getElementById('task-date-input');
   const taskProject = document.getElementById('task-projects-select');
   const taskPriority = document.getElementById('task-priority-select');
   const taskDescription = document.getElementById('task-desc-textarea');
+  const projectItemsList = document.getElementById('project-items-list');
+
+  let currentUpdateTaskId = '';
 
   const checkValidation = () => {
     const inputs = document.querySelectorAll(
@@ -204,6 +206,17 @@ const taskPanel = (() => {
     todoController.addTaskToProject(task, taskProject.value);
     uiController.reloadCurrentProject();
   };
+  const updateTask = (taskId) => {
+    todoController.updateTask(
+      taskTitle.value,
+      taskDescription.value,
+      taskPriority.value,
+      parseISO(taskDate.value),
+      taskProject.value,
+      taskId
+    );
+    uiController.reloadCurrentProject();
+  };
 
   const addProjectsOptions = () => {
     const projects = todoController.getProjects();
@@ -222,13 +235,40 @@ const taskPanel = (() => {
     taskDescription.value = '';
   };
 
-  const showPanel = () => {
+  const displayPanel = () => {
     addTaskScreen.classList.remove('display-none');
   };
   const hidePanel = () => {
     addTaskScreen.classList.add('display-none');
   };
 
+  const displayAddPanel = () => {
+    resetPanel();
+    updateTaskBtn.classList.add('display-none');
+    addTaskBtn.classList.remove('display-none');
+    displayPanel();
+  };
+  const fillWithTaskInfo = (task) => {
+    taskTitle.value = task.title;
+
+    // turn task date to string then slice everything other then date(like time) out
+    taskDate.value = task.dueDate.toISOString().substring(0, 10);
+    taskProject.value = task.projectId;
+    taskPriority.value = task.priority;
+    taskDescription.value = task.desc;
+  };
+  const displayUpdatePanel = (taskId) => {
+    updateTaskBtn.classList.remove('display-none');
+    addTaskBtn.classList.add('display-none');
+    displayPanel();
+    fillWithTaskInfo(todoController.getTask(taskId));
+  };
+
+  updateTaskBtn.addEventListener('click', (e) => {
+    updateTask(currentUpdateTaskId);
+    hidePanel();
+    e.preventDefault();
+  });
   addTaskBtn.addEventListener('click', (e) => {
     if (checkValidation()) {
       addTaskToProject();
@@ -238,10 +278,16 @@ const taskPanel = (() => {
     e.preventDefault();
   });
 
-  addTaskContentButton.addEventListener('click', showPanel);
+  addTaskContentButton.addEventListener('click', displayAddPanel);
 
   closeButton.addEventListener('click', (e) => {
     hidePanel();
     e.preventDefault();
+  });
+  projectItemsList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('task-edit')) {
+      currentUpdateTaskId = e.target.dataset.taskId;
+      displayUpdatePanel(e.target.dataset.taskId);
+    }
   });
 })();

@@ -18,6 +18,10 @@ const todoController = (() => {
   const findProjectIndex = (projectId) =>
     projects.findIndex((project) => project.id === projectId);
 
+  // Find the index of a project with the given ID
+  const findTaskIndex = (taskId) =>
+    getAllTasks().findIndex((task) => task.id === taskId);
+
   // Remove a project with the given ID
   const removeProject = (projectId) => {
     const projectIndex = findProjectIndex(projectId);
@@ -60,6 +64,26 @@ const todoController = (() => {
   };
   loadDefaultInbox();
 
+  // return task object that correspond to given ID
+  const getTask = (taskId) => getAllTasks()[findTaskIndex(taskId)];
+
+  const updateTask = (
+    newTitle,
+    newDesc,
+    newPriority,
+    newDate,
+    newProjectId,
+    taskId
+  ) => {
+    getAllTasks()[findTaskIndex(taskId)].updateTask(
+      newTitle,
+      newDesc,
+      newPriority,
+      newDate,
+      newProjectId
+    );
+  };
+
   // Get all tasks due today
   const getTodayTasks = () =>
     getAllTasks().filter((task) => isToday(task.dueDate));
@@ -90,6 +114,8 @@ const todoController = (() => {
     getThisWeekTasks,
     getCompletedTasks,
     getProjectTasks,
+    getTask,
+    updateTask,
   };
 })();
 

@@ -9,11 +9,11 @@ export default function createTask(
   tProjectId = '1'
 ) {
   // Validate and format input parameters
-  const title = typeof tTitle === 'string' ? tTitle.trim() : '';
-  const desc = typeof tDesc === 'string' ? tDesc.trim() : '';
-  const priority = typeof tPriority === 'string' ? tPriority.trim() : '';
-  const dueDate = isValid(tDueDate) ? tDueDate : new Date();
-  const projectId = typeof tProjectId === 'string' ? tProjectId.trim() : '';
+  let title = typeof tTitle === 'string' ? tTitle.trim() : '';
+  let desc = typeof tDesc === 'string' ? tDesc.trim() : '';
+  let priority = typeof tPriority === 'string' ? tPriority.trim() : '';
+  let dueDate = isValid(tDueDate) ? tDueDate : new Date();
+  let projectId = typeof tProjectId === 'string' ? tProjectId.trim() : '';
 
   // Generate unique task ID
   const id = uuidv4();
@@ -24,7 +24,7 @@ export default function createTask(
     newDesc,
     newPriority,
     newDueDate,
-    newCompleted
+    newProjectId
   ) => {
     // Validate and format input parameters
     const updatedTitle = typeof newTitle === 'string' ? newTitle.trim() : title;
@@ -32,16 +32,18 @@ export default function createTask(
     const updatedPriority =
       typeof newPriority === 'string' ? newPriority.trim() : priority;
     const updatedDueDate = isValid(newDueDate) ? newDueDate : dueDate;
-    const updatedCompleted =
-      typeof newCompleted === 'boolean' ? newCompleted : isCompleted;
+    const updateProjectId =
+      typeof newProjectId === 'string' ? newProjectId : projectId;
 
     // Update task properties
     title = updatedTitle;
     desc = updatedDesc;
     priority = updatedPriority;
     dueDate = updatedDueDate;
-    isCompleted = updatedCompleted;
+    projectId = updateProjectId;
   };
+
+  const toggleTaskStatus = () => (isCompleted ? !isCompleted : isCompleted);
 
   // Define task object
   let isCompleted = false;
@@ -68,6 +70,7 @@ export default function createTask(
       return projectId;
     },
     updateTask,
+    toggleTaskStatus,
   };
 
   return task;
