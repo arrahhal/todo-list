@@ -64,6 +64,10 @@ const todoController = (() => {
   };
   loadDefaultInbox();
 
+  const toggleTaskStatus = (taskId) => {
+    getAllTasks()[findTaskIndex(taskId)].toggleStatus();
+  };
+
   // return task object that correspond to given ID
   const getTask = (taskId) => getAllTasks()[findTaskIndex(taskId)];
 
@@ -115,6 +119,7 @@ const todoController = (() => {
     getCompletedTasks,
     getProjectTasks,
     getTask,
+    toggleTaskStatus,
     updateTask,
   };
 })();

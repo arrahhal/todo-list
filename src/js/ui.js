@@ -44,12 +44,13 @@ export const uiController = (() => {
     return icon;
   };
 
-  const createCheckbox = (id, label) => {
+  const createCheckbox = (id, label, completed) => {
     const checkboxContainer = document.createElement('div');
     checkboxContainer.classList.add('task-checkbox-container');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = id;
+    if (completed) checkbox.checked = true;
     checkbox.classList.add('task-checkbox');
     const checkboxLabel = document.createElement('label');
     checkboxLabel.classList.add('task-text');
@@ -66,10 +67,10 @@ export const uiController = (() => {
    * @param {number} id - The ID of the task.
    * @returns {HTMLElement} The task list item element.
    */
-  const createTaskListItem = (title, dueDate, id) => {
+  const createTaskListItem = (title, dueDate, completed, id) => {
     const taskListItem = document.createElement('li');
     taskListItem.classList.add('task');
-    const checkboxContainer = createCheckbox(id, title);
+    const checkboxContainer = createCheckbox(id, title, completed);
 
     const rightContainer = document.createElement('div');
     rightContainer.classList.add('flex');
@@ -101,7 +102,7 @@ export const uiController = (() => {
     projectItemsList.textContent = '';
     tasksList.forEach((task) =>
       projectItemsList.append(
-        createTaskListItem(task.title, task.dueDate, task.id)
+        createTaskListItem(task.title, task.dueDate, task.isCompleted, task.id)
       )
     );
   };
@@ -150,6 +151,8 @@ export const uiController = (() => {
   projectItemsList.addEventListener('click', (e) => {
     if (e.target.classList.contains('task-remove'))
       removeTask(e.target.dataset.taskId);
+    if (e.target.classList.contains('task-text'))
+      todoController.toggleTaskStatus(e.target.control.id);
   });
 
   allLists.forEach((list) =>

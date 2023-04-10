@@ -43,7 +43,7 @@ export default function createTask(
     projectId = updateProjectId;
   };
 
-  const toggleTaskStatus = () => (isCompleted ? !isCompleted : isCompleted);
+  const toggleStatus = () => (isCompleted = !isCompleted);
 
   // Define task object
   let isCompleted = false;
@@ -70,7 +70,7 @@ export default function createTask(
       return projectId;
     },
     updateTask,
-    toggleTaskStatus,
+    toggleStatus,
   };
 
   return task;
