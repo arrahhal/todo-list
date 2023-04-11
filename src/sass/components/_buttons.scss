@@ -46,3 +46,18 @@
     fill: $clr-neutral-900;
   }
 }
+.submit-project-button {
+  margin-top: 0.3rem;
+  justify-content: center;
+  padding: 0.3rem;
+  border: 1px solid $clr-accent;
+  color: $clr-accent;
+
+  &:hover {
+    color: $clr-neutral-900;
+    background-color: $clr-accent;
+  }
+}
+.project > button {
+  pointer-events: none;
+}

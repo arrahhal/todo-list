@@ -28,3 +28,9 @@
   grid-template-rows: min-content;
   gap: 1rem;
 }
+.user-project-form {
+  font-size: $fs-sm;
+  color: $clr-neutral-400;
+  display: flex;
+  flex-direction: column;
+}

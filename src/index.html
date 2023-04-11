@@ -33,7 +33,7 @@
       </div>
     </header>
     <main class="main-container">
-      <div class="sidebar-container open">
+      <div id="sidebar-container" class="sidebar-container open">
         <nav class="default-projects">
           <ul role="list" class="default-projects-list">
             <li id="inbox-project" class="project" data-id="1">
@@ -96,8 +96,30 @@
               />
             </svg>
           </button>
+          <form
+            id="user-project-form"
+            class="user-project-form display-none"
+            action=""
+          >
+            <label for="new-project-input">Enter project name:</label
+            ><input
+              type="text"
+              name="new-project-title"
+              id="new-project-title"
+            />
+            <button
+              id="submit-project-button"
+              class="submit-project-button btn"
+            >
+              Add
+            </button>
+          </form>
           <nav class="user-projects-nav expanded">
-            <ul role="list" class="user-projects-list"></ul>
+            <ul
+              role="list"
+              id="user-projects-list"
+              class="user-projects-list"
+            ></ul>
           </nav>
         </div>
       </div>

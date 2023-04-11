@@ -1,4 +1,5 @@
 import { format, parseISO } from 'date-fns';
+import { createProject } from './projects';
 import createTask from './tasks';
 import todoController from './todo';
 
@@ -12,6 +13,12 @@ export const uiController = (() => {
   const completed = document.getElementById('completed-list');
   let currentProjectId = '1';
   const addTaskBtn = document.getElementById('add-task-button');
+  const addUserProjectBtn = document.getElementById('add-user-project');
+  const userProjectForm = document.getElementById('user-project-form');
+  const submitUserProject = document.getElementById('submit-project-button');
+  const userProjectTitle = document.getElementById('new-project-title');
+  const userProjectsList = document.getElementById('user-projects-list');
+  const sidebar = document.getElementById('sidebar-container');
 
   const clearCurrentFocus = () => {
     allProjects.forEach((project) => project.classList.remove('current-focus'));
@@ -94,7 +101,9 @@ export const uiController = (() => {
     return taskListItem;
   };
   const displayCurrentProject = (projectId) => {
-    const projectTasks = todoController.getProjectTasks(projectId);
+    const projectTasks = todoController
+      .getProjectTasks(projectId)
+      .filter((task) => task.isCompleted === false);
     appendTasksList(projectTasks);
   };
 
@@ -148,19 +157,67 @@ export const uiController = (() => {
     displayCurrentProject(currentProjectId);
   };
 
+  const toggleNewProjectForm = () => {
+    userProjectForm.classList.toggle('display-none');
+  };
+
+  const addUserProject = () => {
+    todoController.addProject(userProjectTitle.value);
+  };
+
+  const hideNewProjectForm = () => {
+    userProjectTitle.value = '';
+    toggleNewProjectForm();
+  };
+
+  const createProjectListItem = (project) => {
+    const li = document.createElement('li');
+    li.classList.add('project');
+    li.dataset.id = project.id;
+    const btn = document.createElement('button');
+    li.appendChild(btn);
+    btn.classList.add('user-project', 'btn');
+    btn.textContent = project.title;
+
+    return li;
+  };
+
+  const createProjectsList = () => {
+    userProjectsList.textContent = '';
+    const userProjects = todoController
+      .getProjects()
+      .filter((project) => project.title != 'Inbox');
+    userProjects.forEach((project) =>
+      userProjectsList.appendChild(createProjectListItem(project))
+    );
+  };
+
+  submitUserProject.addEventListener('click', (e) => {
+    addUserProject();
+    hideNewProjectForm();
+    createProjectsList();
+    console.log(todoController.getProjects());
+    e.preventDefault();
+  });
+
+  addUserProjectBtn.addEventListener('click', toggleNewProjectForm);
   projectItemsList.addEventListener('click', (e) => {
     if (e.target.classList.contains('task-remove'))
       removeTask(e.target.dataset.taskId);
     if (e.target.classList.contains('task-text'))
       todoController.toggleTaskStatus(e.target.control.id);
+    reloadCurrentProject();
   });
 
   allLists.forEach((list) =>
     list.addEventListener('click', () => setCurrentList(list))
   );
-  allProjects.forEach((project) =>
-    project.addEventListener('click', () => setCurrentProject(project))
-  );
+  sidebar.addEventListener('click', (e) => {
+    if (e.target.hasAttribute('data-id')) {
+      setCurrentProject(e.target);
+      currentProjectId = e.target.dataset.id;
+    }
+  });
 
   return {
     reloadCurrentProject,
@@ -222,6 +279,7 @@ const taskPanel = (() => {
   };
 
   const addProjectsOptions = () => {
+    taskProject.textContent = '';
     const projects = todoController.getProjects();
 
     projects.forEach((project) => {
@@ -231,11 +289,11 @@ const taskPanel = (() => {
       taskProject.appendChild(opt);
     });
   };
-  addProjectsOptions();
 
   const resetPanel = () => {
     taskTitle.value = '';
     taskDescription.value = '';
+    addProjectsOptions();
   };
 
   const displayPanel = () => {

@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const createProject = (pTitle) => {
   let title = pTitle;
   let tasks = [];
-  const id = Math.floor(Math.random() * Date.now()).toString();
+  const id = uuidv4();
 
   function updateProject(newTitle) {
     title = newTitle;
