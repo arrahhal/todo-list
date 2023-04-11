@@ -17,6 +17,7 @@
     "start": "npm-run-all copy --parallel watch serve",
     "build:webpack": "webpack",
     "build": "npm-run-all copy:html build:*",
+    "deploy": "gh-pages -d dist",
     "postbuild": "postcss dist/css/*.css -u autoprefixer cssnano -r --no-map"
   },
   "repository": {
@@ -40,6 +41,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "gh-pages": "^5.0.0",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
     "postcss-cli": "^9.1.0",
