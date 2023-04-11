@@ -1,0 +1,524 @@
+/* font sizing */
+/* font families */
+/* letter spacing */
+/* font weight */
+/* font sizing */
+.text-base {
+  font-size: 1.25rem;
+}
+
+.text-lg {
+  font-size: 1.875rem;
+}
+
+.text-xl {
+  font-size: 2.25rem;
+}
+
+/* text colors */
+.text-black {
+  color: #000000;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+/* font families */
+.ff-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.ff-montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* letter spacing */
+.letter-spacing-1 {
+  letter-spacing: 0.05em;
+}
+
+/* font weights */
+.fw-normal {
+  font-weight: 400;
+}
+
+.fw-bold {
+  font-weight: 500;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.container {
+  margin-inline: auto;
+  width: min(100% - 2rem, 55rem);
+}
+
+.flex {
+  display: flex;
+  gap: var(--gap, 0.5rem);
+  align-items: center;
+}
+
+/* Modern CSS Reset by Andy Bell https://andy-bell.co.uk/a-modern-css-reset/ */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+*::selection {
+  background-color: #ffa;
+}
+
+body {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas: "header" "main";
+}
+
+.main-container {
+  position: relative;
+  display: flex;
+}
+
+.header-container {
+  grid-area: header;
+}
+
+.header-container {
+  position: relative;
+  z-index: 9;
+  display: flex;
+  border-bottom: 1px solid #ee5244;
+  padding: 0.125rem;
+  background-color: #ee5244;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+  font-size: 2.25rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.logo-icon {
+  width: 4rem;
+  margin-inline-end: 0.25rem;
+  fill: #ffffff;
+}
+
+.sidebar-container {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 3rem;
+  width: clamp(15rem, 20vw, 20rem);
+  background-color: #fcf5ee;
+  color: #000000;
+  padding-inline: 1rem;
+  padding-block: 3rem;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  width: 2rem;
+  aspect-ratio: 1;
+  background-image: url("./assets/icons/menu-svgrepo-com.svg");
+}
+
+.sidebar-toggle.expanded {
+  background-image: url("./assets/icons/close-svgrepo-com.svg");
+}
+
+.user-projects-container {
+  display: grid;
+  grid-template-rows: min-content;
+  gap: 1rem;
+}
+
+.user-project-form {
+  font-size: 1rem;
+  color: #575757;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  margin: 1rem;
+  margin-inline: clamp(2rem, 3vw, 4rem);
+  flex: 1;
+}
+
+.current-project-title {
+  color: #575757;
+}
+
+.content-header-container {
+  justify-content: space-between;
+  border-bottom: 1px solid hsla(53, 10%, 69%, 0.2);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.project-items-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.task {
+  padding: 0.5rem 1rem;
+  display: flex;
+  background-color: hsla(53, 10%, 69%, 0.2);
+  border-radius: 4px;
+}
+
+.task-checkbox-container {
+  flex: 1;
+}
+
+.task-checkbox {
+  display: none;
+}
+
+.task-checkbox:checked + .task-text {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.task-option {
+  width: 1.5rem;
+  margin-inline-end: 0.25rem;
+  fill: #575757;
+}
+.task-option:hover {
+  fill: #ee5244;
+}
+
+.task-date {
+  font-style: italic;
+  color: #575757;
+  font-size: 1rem;
+}
+
+.default-projects-icon {
+  width: 1.75rem;
+  margin-inline-end: 1rem;
+}
+
+.add-project-icon {
+  width: 1.75rem;
+  fill: #316fea;
+}
+
+.task-remove path,
+.task-edit path {
+  pointer-events: none;
+}
+
+.current-project-add-task-icon {
+  width: 2rem;
+}
+
+.default-projects-list {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 1rem;
+}
+
+.user-projects-list {
+  height: 0;
+  overflow-y: hidden;
+  display: grid;
+  padding-top: 0.5rem;
+  gap: 1rem;
+  grid-template-areas: "addNewProjectBtn";
+}
+
+.user-projects-nav.expanded .user-projects-list {
+  height: auto;
+}
+
+.user-projects-nav.expanded .user-projects-toggle-arrow {
+  transform: rotate(90deg);
+}
+
+.project:hover,
+.task-list:hover,
+.current-focus {
+  background-color: hsla(53, 10%, 69%, 0.2);
+  border: none;
+  border-radius: 5px;
+}
+
+.user-project {
+  padding: 0.2rem 0.4rem;
+}
+
+.default-project {
+  padding-block: 0.25rem;
+  width: 100%;
+}
+
+.current-project {
+  background-color: #ee5244;
+  border: none;
+  border-radius: 5px;
+}
+
+.content-add-task-button {
+  border: 2px solid hsla(220, 81%, 55%, 0.5);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+}
+.content-add-task-button:hover {
+  background-color: hsla(220, 81%, 55%, 0.5);
+}
+
+.add-project-button {
+  border: 1px solid #316fea;
+  fill: #316fea;
+  justify-content: center;
+  width: 100%;
+}
+.add-project-button:hover {
+  background-color: #316fea;
+}
+.add-project-button:hover svg {
+  fill: #ffffff;
+}
+
+.content-add-task-button {
+  border: 1px solid #316fea;
+  fill: #316fea;
+  justify-content: center;
+}
+.content-add-task-button:hover {
+  background-color: #316fea;
+}
+.content-add-task-button:hover svg {
+  fill: #ffffff;
+}
+
+.submit-project-button {
+  margin-top: 0.3rem;
+  justify-content: center;
+  padding: 0.3rem;
+  border: 1px solid #316fea;
+  color: #316fea;
+}
+.submit-project-button:hover {
+  color: #ffffff;
+  background-color: #316fea;
+}
+
+.project > button {
+  pointer-events: none;
+}
+
+.add-task-screen {
+  position: absolute;
+  z-index: 9999999999;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: hsla(53, 10%, 69%, 0.2);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-task-panel {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  width: min(100vw - 4rem, 45rem);
+  border-radius: 5px;
+}
+
+.add-task-heading {
+  font-size: 2.25rem;
+  font-weight: 500;
+  border-bottom: 1px solid #000;
+  margin-bottom: 1rem;
+}
+
+.add-task-from {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.desc-wrapper {
+  grid-column: 1/3;
+}
+
+.new-task-desc {
+  resize: vertical;
+  grid-column: 2fr;
+}
+
+input,
+select {
+  height: 2rem;
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid hsla(53, 10%, 69%, 0.2);
+  font-size: 1.25rem;
+  background-color: #fcf5ee;
+  min-height: 2.5rem;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border: 1px solid #ee5244;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.input-btn {
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.input-btn:hover {
+  opacity: 0.9;
+}
+
+.display-none {
+  display: none;
+}
+
+.add-task-button {
+  background-color: #316fea;
+  color: #ffffff;
+}
+
+.remove-task-button {
+  background-color: #ee5244;
+  color: #ffffff;
+}
+
+.required {
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.invalid::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(./assets/icons/alert-svgrepo-com.svg);
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  z-index: 1;
+}
