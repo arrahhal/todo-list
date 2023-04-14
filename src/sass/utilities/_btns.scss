@@ -1,6 +1,6 @@
 @use '../abstracts/' as *;
 
-.btn {
+%reset-btn {
   display: flex;
   align-items: center;
   border-radius: 4px;
@@ -8,4 +8,18 @@
   border: none;
   background: none;
   color: inherit;
+}
+%sidebar__project-btn--hover:hover {
+  background-color: $clr-semi-neutral-400;
+  border: none;
+  border-radius: 5px;
+}
+
+.input-btn {
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 5px;
+}
+.input-btn:hover {
+  opacity: 0.9;
 }

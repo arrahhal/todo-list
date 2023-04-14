@@ -1,0 +1,24 @@
+@use '../abstracts/' as *;
+
+.todo {
+  padding-block-start: $content-padding-top;
+  margin-inline: clamp(2rem, 3vw, 4rem);
+  flex: 1;
+}
+.todo__title {
+  color: $clr-neutral-400;
+  font-size: $fs-xl;
+  font-weight: $fw-bold;
+}
+.todo__header {
+  border-bottom: 1px solid $clr-semi-neutral-400;
+  margin-bottom: 1rem;
+}
+.todo__tasks-list {
+  display: grid;
+  gap: 1rem;
+}
+.todo__container {
+  width: min(100% - 2rem, 60rem);
+  margin-inline: auto;
+}

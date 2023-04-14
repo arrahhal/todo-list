@@ -1,17 +1,16 @@
 @use '../abstracts/' as *;
 
-.default-projects-icon {
+.sidebar__project-icon {
   width: 1.75rem;
   margin-inline-end: 1rem;
 }
-.add-project-icon {
+.sidebar__add-project-icon {
   width: 1.75rem;
-  fill: $clr-accent;
 }
-.task-remove path,
-.task-edit path {
+.task__remove-icon path,
+.task__edit-icon path {
   pointer-events: none;
 }
-.current-project-add-task-icon {
+.todo__add-task-btn {
   width: 2rem;
 }

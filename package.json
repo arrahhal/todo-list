@@ -51,7 +51,10 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "date-fns": "^2.29.3",
+    "jquery": "^3.6.4",
+    "popper.js": "^1.16.1",
     "uuid": "^9.0.0"
   }
 }

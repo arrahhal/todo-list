@@ -1,0 +1,8 @@
+@use './colors' as *;
+
+$w-project-icon: 1.5rem;
+$content-padding-top: 6rem;
+$inset-shadow: inset 0 1px 1px #20223a15;
+$clr-checkbox-shadow-focus: $clr-semi-accent;
+$checkbox-focus-shadow: 0 0 0 3px $clr-checkbox-shadow-focus;
+$radius: 4px;

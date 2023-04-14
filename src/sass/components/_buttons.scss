@@ -1,16 +1,75 @@
 @use '../abstracts/' as *;
+@use '../utilities/' as *;
 
-.default-project {
+.header__sidebar-toggle {
+  @extend %reset-btn;
+  position: absolute;
+  justify-content: center;
+  font-size: $fs-lg;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  aspect-ratio: 1;
+
+  /* If sidebar is expanded show xmark and hide bars and vise versa */
+  & > .xmark-icon {
+    display: none;
+  }
+  & > .bars-icon {
+    display: block;
+  }
+
+  &.is-expanded > .bars-icon {
+    display: none;
+  }
+  &.is-expanded > .xmark-icon {
+    display: block;
+  }
+}
+
+.sidebar__project-btn,
+.sidebar__projects-list-toggle {
+  @extend %reset-btn, %sidebar__project-btn--hover;
   padding-block: 0.25rem;
   width: 100%;
 }
 
-.current-project {
-  background-color: $clr-base-400;
-  border: none;
-  border-radius: 5px;
+.sidebar__projects-list-toggle {
+  position: relative;
+  &.sidebar__project-btn--active {
+    @extend %sidebar__project-btn--hover;
+  }
 }
-.content-add-task-button {
+.sidebar__projects-list-toggle::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  aspect-ratio: 1;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  background-image: url(./assets/icons/arrow.svg);
+  opacity: 0.5;
+  z-index: 1;
+  transition: 0.3s ease-in-out;
+  &.sidebar__projects-list-toggle.is-expanded {
+    transform: rotate(180deg);
+    top: 30%;
+  }
+}
+.sidebar__add-project-btn {
+  @extend %reset-btn;
+  justify-content: center;
+  border: 1px solid $clr-accent;
+  height: 2rem;
+  color: $clr-accent;
+  &.sidebar__add-project-btn--active:active {
+    background-color: $clr-accent;
+    color: $clr-neutral-900;
+  }
+}
+.todo__add-task-btn {
+  @extend %reset-btn;
   border: 2px solid $clr-semi-accent;
   border-radius: 4px;
   padding: 0.5rem 1rem;
@@ -20,21 +79,8 @@
   }
 }
 
-.add-project-button {
-  border: 1px solid $clr-accent;
-  fill: $clr-accent;
-  justify-content: center;
-  width: 100%;
-
-  &:hover {
-    background-color: $clr-accent;
-  }
-  &:hover svg {
-    fill: $clr-neutral-900;
-  }
-}
-
-.content-add-task-button {
+.todo__add-task-btn {
+  @extend %reset-btn;
   border: 1px solid $clr-accent;
   fill: $clr-accent;
   justify-content: center;
@@ -46,7 +92,8 @@
     fill: $clr-neutral-900;
   }
 }
-.submit-project-button {
+.sidebar__btn {
+  @extend %reset-btn;
   margin-top: 0.3rem;
   justify-content: center;
   padding: 0.3rem;
@@ -58,6 +105,14 @@
     background-color: $clr-accent;
   }
 }
-.project > button {
-  pointer-events: none;
+
+.form__add-btn {
+  @extend .input-btn;
+  background-color: $clr-accent;
+  color: $clr-neutral-900;
+}
+.form__close-btn {
+  @extend .input-btn;
+  background-color: $clr-base-400;
+  color: $clr-neutral-900;
 }

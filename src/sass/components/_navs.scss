@@ -1,34 +1,11 @@
 @use '../abstracts/' as *;
 
-.default-projects-list {
+.sidebar__projects-list {
   display: grid;
   grid-auto-rows: min-content;
   gap: 1rem;
 }
 
-.user-projects-list {
-  height: 0;
-  overflow-y: hidden;
-  display: grid;
-  padding-top: 0.5rem;
-  gap: 1rem;
-  grid-template-areas: 'addNewProjectBtn';
-}
-
-.user-projects-nav.expanded .user-projects-list {
-  height: auto;
-}
-
-.user-projects-nav.expanded .user-projects-toggle-arrow {
-  transform: rotate(90deg);
-}
-.project:hover,
-.task-list:hover,
-.current-focus {
-  background-color: $clr-semi-neutral-400;
-  border: none;
-  border-radius: 5px;
-}
 .user-project {
   padding: 0.2rem 0.4rem;
 }

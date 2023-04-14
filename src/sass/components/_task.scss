@@ -1,0 +1,32 @@
+@use '../abstracts/' as *;
+
+.task {
+  --task-priority: #316fea;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-auto-flow: column;
+  padding: 0.5rem 1rem;
+  background-color: $clr-semi-neutral-400;
+  border-radius: 4px;
+}
+.task__checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.task__label {
+  flex: 1;
+}
+.task__checkbox:checked ~ .task__label {
+  color: $clr-neutral-400;
+  text-decoration: line-through;
+}
+.task__control-icon {
+  width: 1.5rem;
+  margin-inline-end: 0.25rem;
+  fill: $clr-neutral-400;
+
+  &:hover {
+    fill: $clr-base-400;
+  }
+}
