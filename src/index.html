@@ -115,7 +115,11 @@
             <ul id="todo__tasks-list" role="list" class="todo__tasks-list">
               <li class="task">
                 <div class="task__checkbox-group">
-                  <input type="checkbox" id="task" class="task__checkbox" />
+                  <input
+                    type="checkbox"
+                    id="task"
+                    class="task__checkbox form-check-input"
+                  />
                   <label class="task__label" for="task">Do my homework</label>
                 </div>
                 <div class="task__controllers"></div>
@@ -125,18 +129,20 @@
         </div>
       </div>
     </main>
-    <!-- The Modal -->
+    <!-- Modals -->
     <div id="addTaskModal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
+            <h5 class="modal-title">New Task</h5>
             <button
               type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
+              class="btn"
+              data-close="#addTaskModal"
               aria-label="Close"
-            ></button>
+            >
+              <span><i class="fa-solid fa-xmark fa-xl"></i></span>
+            </button>
           </div>
           <div class="modal-body">
             <form class="form__task-form" action="">
@@ -169,7 +175,6 @@
                   type="date"
                   id="add-task__duedate-input"
                   class="form__duedate-input form-control"
-                  required
                 />
               </div>
               <div class="form__input-group">
@@ -201,11 +206,187 @@
             <button
               type="button"
               class="btn btn-secondary"
-              data-bs-dismiss="modal"
+              data-close="#addTaskModal"
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button id="#addTaskBtn" type="button" class="btn btn-primary">
+              Add Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="updateTaskModal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update Task</h5>
+            <button
+              type="button"
+              class="btn"
+              data-close="#updateTaskModal"
+              aria-label="Close"
+            >
+              <span><i class="fa-solid fa-xmark fa-xl"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form__task-form" action="">
+              <div class="form__input-group">
+                <label class="form-label" for="add-task__name-input"
+                  >Name</label
+                >
+                <input
+                  class="form__name-input form-control"
+                  type="text"
+                  id="update-task__name-input"
+                  required
+                />
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="form__project-select"
+                  >Project</label
+                >
+                <select
+                  class="form-control"
+                  id="update-task__project-select"
+                  required
+                ></select>
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="update-task__duedate-input"
+                  >Date</label
+                >
+                <input
+                  type="date"
+                  id="update-task__duedate-input"
+                  class="form__duedate-input form-control"
+                />
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="update-task__priority-input"
+                  >Priority</label
+                >
+                <select
+                  class="update-task__project-select form-control"
+                  id="update-task__priority-input"
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <div class="form__input-group form__desc-wrapper">
+                <label class="form-label" for="update-task__desc-textarea"
+                  >Description</label
+                ><textarea
+                  rows="3"
+                  placeholder=""
+                  id="update-task__desc-textarea"
+                  class="form__desc-textarea form-control"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="#updateTaskModal"
+            >
+              Close
+            </button>
+            <button id="updateTaskBtn" type="button" class="btn btn-primary">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Project</h5>
+            <button
+              type="button"
+              class="btn"
+              data-close="#addProjectModal"
+              aria-label="Close"
+            >
+              <span><i class="fa-solid fa-close fa-xl"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form__input-group">
+              <label class="form-label" for="add-project__name-input"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="add-project__name-input"
+                class="form__text-input form-control"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="#addProjectModal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="#addProjectBtn">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Project</h5>
+            <button
+              type="button"
+              class="btn"
+              data-close="#updateProjectModal"
+              aria-label="Close"
+            >
+              <span><i class="fa-solid fa-close fa-xl"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form__input-group">
+              <label class="form-label" for="add-project__name-input"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="update-project__name-input"
+                class="form__text-input form-control"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="#updateProjectModal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="#updateProjectBtn"
+            >
+              Save changes
+            </button>
           </div>
         </div>
       </div>

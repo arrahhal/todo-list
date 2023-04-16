@@ -6,12 +6,11 @@
   grid-template-columns: 1fr auto;
   grid-auto-flow: column;
   padding: 0.5rem 1rem;
-  background-color: $clr-semi-neutral-400;
+  background-color: $clr-neutral-800;
   border-radius: 4px;
 }
 .task__checkbox-group {
   display: flex;
-  align-items: center;
   gap: 1rem;
 }
 .task__label {
