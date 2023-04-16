@@ -1,5 +1,6 @@
 @use '../abstracts/' as *;
 
+.sidebar__filters-list,
 .sidebar__projects-list {
   display: grid;
   grid-auto-rows: min-content;

@@ -11,6 +11,8 @@
   font-weight: $fw-bold;
 }
 .todo__header {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid $clr-semi-neutral-400;
   margin-bottom: 1rem;
 }

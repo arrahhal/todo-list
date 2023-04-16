@@ -23,7 +23,10 @@
   </head>
   <body>
     <header class="header">
-      <button class="header__sidebar-toggle is-expanded">
+      <button
+        id="header__sidebar-toggle"
+        class="header__sidebar-toggle is-expanded"
+      >
         <span class="xmark-icon"><i class="fa-solid fa-xmark"></i></span>
         <span class="bars-icon"><i class="fa-solid fa-bars"></i></span>
       </button>
@@ -37,9 +40,12 @@
     <main class="content">
       <div id="sidebar" class="sidebar is-expanded">
         <nav class="sidebar__projects-nav">
-          <ul role="list" class="sidebar__projects-list">
-            <li id="sidebar__inbox" class="sidebar__project-item">
-              <button class="sidebar__project-btn sidebar__project-btn--active">
+          <ul role="list" class="sidebar__filters-list">
+            <li class="sidebar__project-item">
+              <button
+                id="sidebar__inbox-btn"
+                class="sidebar__project-btn sidebar__project-btn--active"
+              >
                 <img
                   class="sidebar__project-icon"
                   src="./assets/icons/inbox.svg"
@@ -48,30 +54,30 @@
                 <p>Inbox</p>
               </button>
             </li>
-            <li id="sidebar__today" class="sidebar__project-item">
-              <button class="sidebar__project-btn">
+            <li class="sidebar__project-item">
+              <button id="sidebar__today-btn" class="sidebar__filter-btn">
                 <img
-                  class="sidebar__project-icon"
+                  class="sidebar__filter-icon"
                   src="./assets/icons/sun.svg"
                   alt="sun"
                 />
                 <p>Today</p>
               </button>
             </li>
-            <li id="sidebar__week" class="sidebar__project-item">
-              <button class="sidebar__project-btn">
+            <li class="sidebar__project-item">
+              <button id="sidebar__week-btn" class="sidebar__filter-btn">
                 <img
-                  class="sidebar__project-icon"
+                  class="sidebar__filter-icon"
                   src="./assets/icons/calendar.svg"
                   alt="Calendar"
                 />
                 <p>Week</p>
               </button>
             </li>
-            <li id="sidebar__completed" class="sidebar__project-item">
-              <button class="sidebar__project-btn">
+            <li class="sidebar__project-item">
+              <button id="sidebar__completed-btn" class="sidebar__filter-btn">
                 <img
-                  class="sidebar__project-icon"
+                  class="sidebar__filter-icon"
                   src="./assets/icons/archive.svg"
                   alt="Archive"
                 />
@@ -81,7 +87,10 @@
           </ul>
         </nav>
         <div class="sidebar__projects-container">
-          <button class="sidebar__projects-list-toggle is-expanded">
+          <button
+            id="sidebar__projects-toggle"
+            class="sidebar__projects-list-toggle is-expanded"
+          >
             <img
               class="sidebar__project-icon"
               src="./assets/icons/folder.svg"
@@ -91,7 +100,7 @@
           </button>
           <button
             class="sidebar__add-project-btn sidebar__add-project-btn--active"
-            id="sidebar__add-project-btn"
+            id="sidebar__add-project-modal-btn"
           >
             <span class="sidebar__add-project-icon"
               ><i class="fa-regular fa-plus"></i
@@ -100,7 +109,7 @@
           <nav class="sidebar__projects-nav is-expanded">
             <ul
               role="list"
-              id="sidebar__user-projects-nav"
+              id="sidebar__projects-list"
               class="sidebar__project-list"
             ></ul>
           </nav>
@@ -109,6 +118,9 @@
       <div class="todo">
         <div class="todo__header">
           <p id="todo__title" class="todo__title">Index</p>
+          <button id="todo__add-task-modal-btn" class="btn">
+            <span><i class="fa-regular fa-plus fa-xl"></i></span>
+          </button>
         </div>
         <div class="todo__tasks-container">
           <nav>
@@ -130,7 +142,8 @@
       </div>
     </main>
     <!-- Modals -->
-    <div id="addTaskModal" class="modal" tabindex="-1">
+    <!-- 1 Add Task Modal -->
+    <div id="add-task-modal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -138,7 +151,7 @@
             <button
               type="button"
               class="btn"
-              data-close="#addTaskModal"
+              data-close="#add-task-modal"
               aria-label="Close"
             >
               <span><i class="fa-solid fa-xmark fa-xl"></i></span>
@@ -217,7 +230,8 @@
         </div>
       </div>
     </div>
-    <div id="updateTaskModal" class="modal" tabindex="-1">
+    <!-- Update Task Modal -->
+    <div id="update-task-modal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -225,7 +239,7 @@
             <button
               type="button"
               class="btn"
-              data-close="#updateTaskModal"
+              data-close="#update-task-modal"
               aria-label="Close"
             >
               <span><i class="fa-solid fa-xmark fa-xl"></i></span>
@@ -304,7 +318,8 @@
         </div>
       </div>
     </div>
-    <div class="modal" tabindex="-1">
+    <!-- Add Project Modal -->
+    <div id="add-project-modal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -312,7 +327,7 @@
             <button
               type="button"
               class="btn"
-              data-close="#addProjectModal"
+              data-close="#add-project-modal"
               aria-label="Close"
             >
               <span><i class="fa-solid fa-close fa-xl"></i></span>
@@ -345,8 +360,8 @@
         </div>
       </div>
     </div>
-
-    <div class="modal" tabindex="-1">
+    <!--Update Project Modal -->
+    <div id="udpate-project-modal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -354,7 +369,7 @@
             <button
               type="button"
               class="btn"
-              data-close="#updateProjectModal"
+              data-close="#update-project-modal"
               aria-label="Close"
             >
               <span><i class="fa-solid fa-close fa-xl"></i></span>

@@ -33,6 +33,9 @@
   padding-block: 0.25rem;
   width: 100%;
 }
+.sidebar__filter-btn {
+  @extend .sidebar__project-btn;
+}
 
 .sidebar__projects-list-toggle {
   position: relative;

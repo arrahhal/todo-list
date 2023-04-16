@@ -4,6 +4,9 @@
   width: 1.75rem;
   margin-inline-end: 1rem;
 }
+.sidebar__filter-icon {
+  @extend .sidebar__project-icon;
+}
 .sidebar__add-project-icon {
   width: 1.75rem;
 }
