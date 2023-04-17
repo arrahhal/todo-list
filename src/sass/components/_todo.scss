@@ -1,10 +1,16 @@
 @use '../abstracts/' as *;
 
 .todo {
-  padding-block-start: $content-padding-top;
+  grid-column: 2 / 3;
+  padding-top: $content-padding-top;
   margin-inline: clamp(2rem, 3vw, 4rem);
-  flex: 1;
+  transition: all 0.4s ease-in-out;
 }
+.sidebar-is-closed > .todo {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+}
+
 .todo__title {
   color: $clr-neutral-400;
   font-size: $fs-xl;

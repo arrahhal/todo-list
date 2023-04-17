@@ -1,14 +1,20 @@
 @use '../abstracts/' as *;
 
 .sidebar {
+  position: relative;
   display: grid;
   grid-auto-rows: min-content;
   gap: 4rem;
-  width: clamp(15rem, 20vw, 20rem);
   background-color: $clr-neutral-700;
   color: $clr-neutral-100;
   padding-inline: 1rem;
   padding-block-start: $content-padding-top;
+  grid-column: 1 / 2;
+  transition: all 0.4s ease-in-out;
+}
+.sidebar-is-closed > .sidebar {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 
 .sidebar__projects-container {

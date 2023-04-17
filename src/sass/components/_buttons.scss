@@ -26,7 +26,11 @@
     display: block;
   }
 }
-
+%sidebar__project-btn--hover:hover {
+  background-color: $clr-semi-neutral-400;
+  border: none;
+  border-radius: 5px;
+}
 .sidebar__project-btn,
 .sidebar__projects-list-toggle {
   @extend %reset-btn, %sidebar__project-btn--hover;
@@ -39,7 +43,7 @@
 
 .sidebar__projects-list-toggle {
   position: relative;
-  &.sidebar__project-btn--active {
+  &.is-active {
     @extend %sidebar__project-btn--hover;
   }
 }
