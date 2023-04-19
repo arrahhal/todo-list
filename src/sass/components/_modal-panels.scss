@@ -1,4 +1,9 @@
 @use '../abstracts/' as *;
+
+.modal.is-displayed {
+  display: block;
+}
+
 .modal-header {
   font-size: $fs-lg;
 }
