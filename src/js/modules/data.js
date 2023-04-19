@@ -2,16 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { isValid } from 'date-fns';
 
 class Storage {
-  static getTasks() {
-    return localStorage.getItem('tasks')
-      ? JSON.parse(localStorage.getItem('tasks'))
-      : [];
-  }
-
-  static updateTasks(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
-
   static getProjects() {
     return localStorage.getItem('projects')
       ? JSON.parse(localStorage.getItem('projects'))

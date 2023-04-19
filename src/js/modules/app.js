@@ -1,128 +1,121 @@
 import { isThisWeek, isToday } from 'date-fns';
-import { Inbox, createProject } from './projects';
-import createTask from './tasks';
+import { Task, Project, Storage } from './data';
 
-const todoController = (() => {
-  const Inbox = new Project('Inbox');
-  const projects = [];
+function addDefaultProjectIfNone() {
+  if (!Storage.getProjects()?.length) {
+    const inbox = new Project('Inbox');
+    Storage.updateProjects([inbox]);
+  }
+}
 
-  // Set up the default projects
-  const setDefaultProjects = () => {
-    projects.push(Inbox);
-  };
-  setDefaultProjects();
+class TaskManager {
+  constructor() {
+    addDefaultProjectIfNone();
 
-  // Add a new project with the given title
-  const addProject = (title) => projects.push(createProject(title));
+    this.projects = Storage.getProjects();
+    this.commit = () => Storage.updateProjects(this.projects);
+  }
 
-  // Find the index of a project with the given ID
-  const findProjectIndex = (projectId) =>
-    projects.findIndex((project) => project.id === projectId);
+  findProjectById(projectId) {
+    return this.projects.find((project) => project.id === projectId);
+  }
 
-  // Find the index of a project with the given ID
-  const findTaskIndex = (taskId) =>
-    getAllTasks().findIndex((task) => task.id === taskId);
-
-  // Remove a project with the given ID
-  const removeProject = (projectId) => {
-    const projectIndex = findProjectIndex(projectId);
-    if (projectIndex > -1) projects.splice(projectIndex, 1);
-  };
-
-  // Update the title of a project with the given ID
-  const updateProject = (newTitle, projectId) => {
-    const projectIndex = findProjectIndex(projectId);
-    if (projectIndex > -1) projects[projectIndex].title = newTitle;
-  };
-
-  // Add a task to a project with the given ID
-  const addTaskToProject = (task, projectId) => {
-    const projectIndex = findProjectIndex(projectId);
-    projects[projectIndex].addTask(task);
-  };
-
-  // Get all tasks from all projects
-  const getAllTasks = () => projects.flatMap((project) => project.getTasks());
-
-  // Remove a task with the given ID from its project
-  const removeTaskFromProject = (targetTaskId) => {
-    const allTasks = getAllTasks();
-    const targetTaskIndex = allTasks.findIndex(
-      (task) => task.id === targetTaskId
+  removeProject(projectId) {
+    const projectIndex = this.projects.findIndex(
+      (project) => project.id === projectId
     );
-    const targetTaskProjectId = allTasks[targetTaskIndex].projectId;
-    const targetTaskProject = projects[findProjectIndex(targetTaskProjectId)];
-    targetTaskProject.removeTask(targetTaskId);
-  };
+    if (projectIndex > -1) {
+      this.projects.splice(projectIndex, 1);
+      this.commit();
+    }
+  }
 
-  const loadDefaultInbox = () => {
-    Inbox.addTask(
-      createTask('task title', 'task desc', 'low', new Date(2023, 3, 6))
-    );
-    Inbox.addTask(
-      createTask('task title', 'task desc', 'low', new Date(2023, 3, 6))
-    );
-  };
-  loadDefaultInbox();
+  updateProject(newTitle, projectId) {
+    const project = this.findProjectById(projectId);
+    if (project) {
+      project.title = newTitle;
+      this.commit();
+    }
+  }
 
-  const toggleTaskStatus = (taskId) => {
-    getAllTasks()[findTaskIndex(taskId)].toggleStatus();
-  };
+  createTask(title, desc, priority, dueDate, projectId) {
+    const task = new Task(title, desc, priority, dueDate, projectId);
+    const project = this.findProjectById(projectId);
+    if (project) {
+      project.addTask(task);
+      this.commit();
+    }
+  }
 
-  // return task object that correspond to given ID
-  const getTask = (taskId) => getAllTasks()[findTaskIndex(taskId)];
+  getAllTasks() {
+    return this.projects.flatMap((project) => project.getTasks());
+  }
 
-  const updateTask = (
-    newTitle,
-    newDesc,
-    newPriority,
-    newDate,
-    newProjectId,
-    taskId
-  ) => {
-    getAllTasks()[findTaskIndex(taskId)].updateTask(
-      newTitle,
-      newDesc,
-      newPriority,
-      newDate,
-      newProjectId
-    );
-  };
+  findTaskIndex(taskId) {
+    return this.getAllTasks().findIndex((task) => task.id === taskId);
+  }
 
-  // Get all tasks due today
-  const getTodayTasks = () =>
-    getAllTasks().filter((task) => isToday(task.dueDate));
+  removeTask(taskId) {
+    const taskIndex = this.findTaskIndex(taskId);
+    if (taskIndex > -1) {
+      const task = this.getAllTasks()[taskIndex];
+      const project = this.findProjectById(task.projectId);
+      if (project) {
+        project.removeTask(taskId);
+        this.commit();
+      }
+    }
+  }
 
-  // Get all tasks due this week
-  const getThisWeekTasks = () =>
-    getAllTasks().filter((task) => isThisWeek(task.dueDate));
+  toggleTaskStatus(taskId) {
+    const taskIndex = this.findTaskIndex(taskId);
+    if (taskIndex > -1) {
+      const task = this.getAllTasks()[taskIndex];
+      task.toggleStatus();
+      this.commit();
+    }
+  }
 
-  // Get all completed tasks
-  const getCompletedTasks = () =>
-    getAllTasks().filter((task) => task.isCompleted);
+  getTask(taskId) {
+    const taskIndex = this.findTaskIndex(taskId);
+    if (taskIndex > -1) {
+      return this.getAllTasks()[taskIndex];
+    }
+    return null;
+  }
 
-  // Get all tasks in the project with the given ID
-  const getProjectTasks = (projectId) =>
-    projects[findProjectIndex(projectId)].getTasks();
+  updateTask(newTitle, newDesc, newPriority, newDate, newProjectId, taskId) {
+    const taskIndex = this.findTaskIndex(taskId);
+    if (taskIndex > -1) {
+      const task = this.getAllTasks()[taskIndex];
+      task.updateTask(newTitle, newDesc, newPriority, newDate, newProjectId);
+      this.commit();
+    }
+  }
 
-  // Get all projects
-  const getProjects = () => projects;
+  getTodayTasks() {
+    return this.getAllTasks().filter((task) => isToday(task.dueDate));
+  }
 
-  return {
-    getProjects,
-    addProject,
-    removeProject,
-    updateProject,
-    addTaskToProject,
-    removeTaskFromProject,
-    getTodayTasks,
-    getThisWeekTasks,
-    getCompletedTasks,
-    getProjectTasks,
-    getTask,
-    toggleTaskStatus,
-    updateTask,
-  };
-})();
+  getThisWeekTasks() {
+    return this.getAllTasks().filter((task) => isThisWeek(task.dueDate));
+  }
 
-export default todoController;
+  getCompletedTasks() {
+    return this.getAllTasks().filter((task) => task.isCompleted);
+  }
+
+  getProjectTasks(projectId) {
+    const project = this.findProjectById(projectId);
+    if (project) {
+      return project.getTasks();
+    }
+    return [];
+  }
+
+  getProjects() {
+    return this.projects;
+  }
+}
+
+export default TaskManager;
