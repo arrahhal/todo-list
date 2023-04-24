@@ -1,65 +1,122 @@
 import { v4 as uuidv4 } from 'uuid';
 import { isValid } from 'date-fns';
 
-class Storage {
-  static getProjects() {
-    return localStorage.getItem('projects')
-      ? JSON.parse(localStorage.getItem('projects'))
+const Storage = (() => {
+  const getProjects = () =>
+    localStorage.getItem('projects')
+      ? JSON.parse(localStorage.getItem('projects')).map(Project.fromJSON)
       : [];
-  }
 
-  static updateProjects(projects) {
-    localStorage.setItem('projects', JSON.stringify(projects));
-  }
-}
+  const updateProjects = (projects) =>
+    localStorage.setItem(
+      'projects',
+      JSON.stringify(projects.map((project) => project.toJSON()))
+    );
 
-class Task {
-  constructor(title, desc, priority, dueDate, projectId) {
-    this.title = typeof title === 'string' ? title.trim() : '';
-    this.desc = typeof desc === 'string' ? desc.trim() : '';
-    this.priority = typeof priority === 'string' ? priority.trim() : '';
-    this.dueDate = isValid(dueDate) ? dueDate : new Date();
-    this.projectId = typeof projectId === 'string' ? projectId.trim() : '';
-    this.id = uuidv4();
-    this.isCompleted = false;
-  }
+  return {
+    getProjects,
+    updateProjects,
+  };
+})();
 
-  update(title, desc, priority, dueDate, projectId) {
-    this.title = typeof title === 'string' ? title.trim() : this.title;
-    this.desc = typeof desc === 'string' ? desc.trim() : this.desc;
-    this.priority =
-      typeof priority === 'string' ? priority.trim() : this.priority;
-    this.dueDate = isValid(dueDate) ? dueDate : this.dueDate;
-    this.projectId = typeof projectId === 'string' ? projectId : this.projectId;
-  }
+const Task = (title, desc, priority, dueDate, projectId) => {
+  const task = {
+    title: typeof title === 'string' ? title.trim() : '',
+    desc: typeof desc === 'string' ? desc.trim() : '',
+    priority: typeof priority === 'string' ? priority.trim() : '',
+    dueDate: isValid(dueDate) ? dueDate : new Date(),
+    projectId: typeof projectId === 'string' ? projectId.trim() : '',
+    id: uuidv4(),
+    isCompleted: false,
+  };
 
-  toggleStatus() {
-    this.isCompleted = !this.isCompleted;
-  }
-}
+  const update = (title, desc, priority, dueDate, projectId) => {
+    task.title = typeof title === 'string' ? title.trim() : task.title;
+    task.desc = typeof desc === 'string' ? desc.trim() : task.desc;
+    task.priority =
+      typeof priority === 'string' ? priority.trim() : task.priority;
+    task.dueDate = isValid(dueDate) ? dueDate : task.dueDate;
+    task.projectId = typeof projectId === 'string' ? projectId : task.projectId;
+  };
 
-class Project {
-  constructor(title) {
-    this.title = title;
-    this.id = uuidv4();
-    this.tasks = [];
-  }
+  const toggleStatus = () => {
+    task.isCompleted = !task.isCompleted;
+  };
 
-  update(title) {
-    this.title = title;
-  }
+  const toJSON = () => ({
+    title: task.title,
+    desc: task.desc,
+    priority: task.priority,
+    dueDate: task.dueDate.toISOString(),
+    projectId: task.projectId,
+    id: task.id,
+    isCompleted: task.isCompleted,
+  });
 
-  addTask(task) {
-    this.tasks.push(task);
-  }
+  return {
+    ...task,
+    update,
+    toggleStatus,
+    toJSON,
+  };
+};
 
-  removeTask(taskId) {
-    this.tasks = this.tasks.filter((task) => task.id !== taskId);
-  }
+Task.fromJSON = (json) => {
+  const task = Task(
+    json.title,
+    json.desc,
+    json.priority,
+    Date.parse(json.dueDate),
+    json.projectId
+  );
+  task.id = json.id;
+  task.isCompleted = json.isCompleted;
+  return task;
+};
 
-  getTasks() {
-    return this.tasks;
-  }
-}
+const Project = (title) => {
+  const project = {
+    title,
+    id: uuidv4(),
+    tasks: [],
+  };
+
+  const update = (title) => {
+    project.title = title;
+  };
+
+  const addTask = (task) => {
+    project.tasks.push(task);
+    console.log('Project tasks:', project.tasks);
+  };
+
+  const removeTask = (taskId) => {
+    project.tasks = project.tasks.filter((task) => task.id !== taskId);
+  };
+
+  const getTasks = () => project.tasks;
+
+  const toJSON = () => ({
+    title: project.title,
+    id: project.id,
+    tasks: project.tasks.map((task) => task.toJSON()),
+  });
+
+  return {
+    ...project,
+    update,
+    addTask,
+    removeTask,
+    getTasks,
+    toJSON,
+  };
+};
+
+Project.fromJSON = (json) => {
+  const project = Project(json.title);
+  project.id = json.id;
+  project.tasks = json.tasks.map(Task.fromJSON);
+  return project;
+};
 
 export { Storage, Task, Project };
