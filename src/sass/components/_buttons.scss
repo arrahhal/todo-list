@@ -40,6 +40,12 @@
 .sidebar__filter-btn {
   @extend .sidebar__project-btn;
 }
+.sidebar__project-btn,
+.sidebar__filter-btn {
+  &.is-focused {
+    background-color: $clr-semi-neutral-400;
+  }
+}
 
 .sidebar__projects-list-toggle {
   position: relative;
@@ -86,17 +92,14 @@
   }
 }
 
-.todo__add-task-btn {
-  @extend %reset-btn;
+.todo__add-task-modal-btn {
   border: 1px solid $clr-accent;
-  fill: $clr-accent;
+  color: $clr-accent;
   justify-content: center;
 
   &:hover {
     background-color: $clr-accent;
-  }
-  &:hover svg {
-    fill: $clr-neutral-900;
+    color: $clr-neutral-900;
   }
 }
 .sidebar__btn {

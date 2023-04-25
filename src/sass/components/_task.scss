@@ -9,7 +9,7 @@
   background-color: $clr-neutral-800;
   border-radius: 4px;
 }
-.task__checkbox-group {
+.task__checkbox-container {
   display: flex;
   gap: 1rem;
 }
@@ -27,5 +27,21 @@
 
   &:hover {
     fill: $clr-base-400;
+  }
+}
+.task__controllers {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.task__date {
+  font-size: $fs-sm;
+}
+.task__option-icon {
+  width: 1.5rem;
+  cursor: pointer;
+
+  &:hover {
+    fill: $clr-accent;
   }
 }
