@@ -1,122 +1,109 @@
 import { v4 as uuidv4 } from 'uuid';
 import { isValid } from 'date-fns';
 
-const Storage = (() => {
-  const getProjects = () =>
-    localStorage.getItem('projects')
+class Storage {
+  static getProjects() {
+    console.log(
+      JSON.parse(localStorage.getItem('projects')).map(Project.fromJSON)
+    );
+    return localStorage.getItem('projects')
       ? JSON.parse(localStorage.getItem('projects')).map(Project.fromJSON)
       : [];
+  }
 
-  const updateProjects = (projects) =>
+  static updateProjects(projects) {
     localStorage.setItem(
       'projects',
       JSON.stringify(projects.map((project) => project.toJSON()))
     );
+  }
+}
 
-  return {
-    getProjects,
-    updateProjects,
-  };
-})();
+class Task {
+  constructor(title, desc, priority, dueDate, projectId) {
+    this.title = typeof title === 'string' ? title.trim() : '';
+    this.desc = typeof desc === 'string' ? desc.trim() : '';
+    this.priority = typeof priority === 'string' ? priority.trim() : '';
+    this.dueDate = isValid(dueDate) ? dueDate : new Date();
+    this.projectId = typeof projectId === 'string' ? projectId.trim() : '';
+    this.id = uuidv4();
+    this.isCompleted = false;
+  }
 
-const Task = (title, desc, priority, dueDate, projectId) => {
-  const task = {
-    title: typeof title === 'string' ? title.trim() : '',
-    desc: typeof desc === 'string' ? desc.trim() : '',
-    priority: typeof priority === 'string' ? priority.trim() : '',
-    dueDate: isValid(dueDate) ? dueDate : new Date(),
-    projectId: typeof projectId === 'string' ? projectId.trim() : '',
-    id: uuidv4(),
-    isCompleted: false,
-  };
+  update(title, desc, priority, dueDate, projectId) {
+    this.title = typeof title === 'string' ? title.trim() : this.title;
+    this.desc = typeof desc === 'string' ? desc.trim() : this.desc;
+    this.priority =
+      typeof priority === 'string' ? priority.trim() : this.priority;
+    this.dueDate = isValid(dueDate) ? dueDate : this.dueDate;
+    this.projectId = typeof projectId === 'string' ? projectId : this.projectId;
+  }
 
-  const update = (title, desc, priority, dueDate, projectId) => {
-    task.title = typeof title === 'string' ? title.trim() : task.title;
-    task.desc = typeof desc === 'string' ? desc.trim() : task.desc;
-    task.priority =
-      typeof priority === 'string' ? priority.trim() : task.priority;
-    task.dueDate = isValid(dueDate) ? dueDate : task.dueDate;
-    task.projectId = typeof projectId === 'string' ? projectId : task.projectId;
-  };
+  toggleStatus() {
+    this.isCompleted = !this.isCompleted;
+  }
+  toJSON() {
+    return {
+      title: this.title,
+      desc: this.desc,
+      priority: this.priority,
+      dueDate: this.dueDate.toISOString(),
+      projectId: this.projectId,
+      id: this.id,
+      isCompleted: this.isCompleted,
+    };
+  }
 
-  const toggleStatus = () => {
-    task.isCompleted = !task.isCompleted;
-  };
+  static fromJSON(json) {
+    const task = new Task(
+      json.title,
+      json.desc,
+      json.priority,
+      Date.parse(json.dueDate),
+      json.projectId
+    );
+    task.id = json.id;
+    task.isCompleted = json.isCompleted;
+    return task;
+  }
+}
 
-  const toJSON = () => ({
-    title: task.title,
-    desc: task.desc,
-    priority: task.priority,
-    dueDate: task.dueDate.toISOString(),
-    projectId: task.projectId,
-    id: task.id,
-    isCompleted: task.isCompleted,
-  });
+class Project {
+  constructor(title) {
+    this.title = title;
+    this.id = uuidv4();
+    this.tasks = [];
+  }
 
-  return {
-    ...task,
-    update,
-    toggleStatus,
-    toJSON,
-  };
-};
+  update(title) {
+    this.title = title;
+  }
 
-Task.fromJSON = (json) => {
-  const task = Task(
-    json.title,
-    json.desc,
-    json.priority,
-    Date.parse(json.dueDate),
-    json.projectId
-  );
-  task.id = json.id;
-  task.isCompleted = json.isCompleted;
-  return task;
-};
+  addTask(task) {
+    this.tasks.push(task);
+  }
 
-const Project = (title) => {
-  const project = {
-    title,
-    id: uuidv4(),
-    tasks: [],
-  };
+  removeTask(taskId) {
+    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+  }
 
-  const update = (title) => {
-    project.title = title;
-  };
+  getTasks() {
+    return this.tasks;
+  }
+  toJSON() {
+    return {
+      title: this.title,
+      id: this.id,
+      tasks: this.tasks.map((task) => task.toJSON()),
+    };
+  }
 
-  const addTask = (task) => {
-    project.tasks.push(task);
-    console.log('Project tasks:', project.tasks);
-  };
-
-  const removeTask = (taskId) => {
-    project.tasks = project.tasks.filter((task) => task.id !== taskId);
-  };
-
-  const getTasks = () => project.tasks;
-
-  const toJSON = () => ({
-    title: project.title,
-    id: project.id,
-    tasks: project.tasks.map((task) => task.toJSON()),
-  });
-
-  return {
-    ...project,
-    update,
-    addTask,
-    removeTask,
-    getTasks,
-    toJSON,
-  };
-};
-
-Project.fromJSON = (json) => {
-  const project = Project(json.title);
-  project.id = json.id;
-  project.tasks = json.tasks.map(Task.fromJSON);
-  return project;
-};
+  static fromJSON(json) {
+    const project = new Project(json.title);
+    project.id = json.id;
+    project.tasks = json.tasks.map(Task.fromJSON);
+    return project;
+  }
+}
 
 export { Storage, Task, Project };
