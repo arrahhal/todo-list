@@ -121,6 +121,11 @@ export const DOM = (() => {
   const toggleAddProjectModal = () => {
     selectors.addProjectModal.classList.toggle('is-displayed');
   };
+  const toggleAddTaskModal = () => {
+    selectors.addTaskModal.classList.toggle('is-displayed');
+  };
+  const closeModalById = (modalId) =>
+    document.querySelector(modalId).classList.remove('is-displayed');
 
   const createProjectItem = (project) => {
     return `<li class="sidebar__project-item">
@@ -178,6 +183,8 @@ export const DOM = (() => {
     appendTasksList,
     setTodoTitle,
     toggleAddProjectModal,
+    toggleAddTaskModal,
+    closeModalById,
     createProjectItem,
     appendProjectsList,
     resetModal,
