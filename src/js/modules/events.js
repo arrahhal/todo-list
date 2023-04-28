@@ -45,4 +45,13 @@ export const initializeListeners = () => {
       DOM.toggleAddTaskModal();
     }
   });
+  selectors.addProjectButton.addEventListener('click', () => {
+    const modalSelector = selectors.addProjectButton.dataset.modalSelector;
+    if (DOM.checkModalValidation(modalSelector)) {
+      taskManager.addNewProject(selectors.addProjectModalNameInput.value);
+      DOM.resetModal(modalSelector);
+      DOM.toggleAddProjectModal();
+      DOM.appendProjectsList(taskManager.getUserProjects());
+    }
+  });
 };

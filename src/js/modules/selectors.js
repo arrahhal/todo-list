@@ -7,7 +7,7 @@ const selectors = {
     'sidebar__add-project-modal-btn'
   ),
   projectsToggle: document.getElementById('sidebar__projects-toggle'),
-  projectsList: document.getElementById('sidebar__user-projects-list'),
+  projectsList: document.getElementById('sidebar__projects-list'),
   tasksList: document.getElementById('todo__tasks-list'),
   todoTitle: document.getElementById('todo__title'),
   sidebarToggle: document.getElementById('header__sidebar-toggle'),

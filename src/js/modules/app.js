@@ -118,6 +118,9 @@ const getProjectTasks = (projectId) => {
 
 const getProjects = () => projects;
 
+const getUserProjects = () =>
+  projects.filter((project) => project.title !== 'Inbox');
+
 const createTaskFunc = (title, desc, priority, dueDate, projectId) => {
   createTask(title, desc, priority, dueDate, projectId);
 };
@@ -165,7 +168,7 @@ const getProjectTasksFunc = (projectId) => {
   return getProjectTasks(projectId);
 };
 
-const addProject = (title) => {
+const addNewProject = (title) => {
   const project = new Project(title);
   projects.push(project);
   _commit();
@@ -197,9 +200,10 @@ export const taskManager = {
   getThisWeekTasksFunc,
   getCompletedTasksFunc,
   getProjectTasksFunc,
-  addProject,
+  addNewProject,
   addNewTaskToProject,
   removeProject,
   updateProject,
   getProjects,
+  getUserProjects,
 };
