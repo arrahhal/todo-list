@@ -67,6 +67,11 @@ export const DOM = (() => {
   const toggleAddTaskModal = () => {
     selectors.addTaskModal.classList.toggle('is-displayed');
   };
+  const toggleSidebar = () => {
+    selectors.sidebarToggle.classList.toggle('is-expanded');
+    selectors.main.classList.toggle('sidebar-is-closed');
+  };
+
   const closeModalById = (modalId) =>
     document.querySelector(modalId).classList.remove('is-displayed');
 
@@ -156,6 +161,7 @@ export const DOM = (() => {
     setTodoTitle,
     toggleAddProjectModal,
     toggleAddTaskModal,
+    toggleSidebar,
     checkModalValidation,
     closeModalById,
     createProjectItem,

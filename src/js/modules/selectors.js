@@ -1,4 +1,5 @@
 const selectors = {
+  main: document.querySelector('.content'),
   filterButtons: document.querySelectorAll('.sidebar__filter-btn'),
   todayButton: document.getElementById('sidebar__today-btn'),
   weekButton: document.getElementById('sidebar__week-btn'),

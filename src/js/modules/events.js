@@ -54,4 +54,7 @@ export const initializeListeners = () => {
       DOM.appendProjectsList(taskManager.getUserProjects());
     }
   });
+  selectors.sidebarToggle.addEventListener('click', () => {
+    DOM.toggleSidebar();
+  });
 };
