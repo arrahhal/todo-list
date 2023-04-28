@@ -12,7 +12,7 @@ export const DOM = (() => {
     projectItem.classList.add('is-focused');
 
   const toggleProjectsList = () =>
-    projectsToggle.classList.toggle('is-expanded');
+    selectors.projectsContainer.classList.toggle('is-expanded');
 
   const createSvg = (shape) => {
     if (shape.toLowerCase() === 'edit')

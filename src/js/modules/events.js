@@ -57,4 +57,7 @@ export const initializeListeners = () => {
   selectors.sidebarToggle.addEventListener('click', () => {
     DOM.toggleSidebar();
   });
+  selectors.projectsToggle.addEventListener('click', () => {
+    DOM.toggleProjectsList();
+  });
 };
