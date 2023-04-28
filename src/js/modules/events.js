@@ -4,7 +4,6 @@ import { taskManager } from './app';
 export const initializeListeners = () => {
   DOM.selectors.filterButtons.forEach((filterBtn) =>
     filterBtn.addEventListener('click', () => {
-      console.log(DOM.selectors.filterButtons);
       DOM.clearCurrentFocus();
       DOM.setCurrentFocus(filterBtn);
       if (filterBtn.id === 'sidebar__today-btn') {
@@ -19,9 +18,10 @@ export const initializeListeners = () => {
       }
     })
   );
-  DOM.selectors.showAddTaskModalButton.addEventListener('click', () =>
-    DOM.toggleAddTaskModal()
-  );
+  DOM.selectors.showAddTaskModalButton.addEventListener('click', () => {
+    DOM.appendProjectOptionsForSelect(taskManager.getProjects());
+    DOM.toggleAddTaskModal();
+  });
   DOM.selectors.closeButtons.forEach((btn) =>
     btn.addEventListener('click', () => {
       const modalId = btn.dataset.close;
@@ -30,5 +30,18 @@ export const initializeListeners = () => {
   );
   DOM.selectors.showAddProjectModalButton.addEventListener('click', () => {
     DOM.toggleAddProjectModal();
+  });
+  DOM.selectors.addTaskButton.addEventListener('click', () => {
+    const modalSelector = DOM.selectors.addTaskButton.dataset.modalSelector;
+    if (DOM.checkModalValidation(modalSelector)) {
+      const name = DOM.selectors.addTaskModalNameInput.value;
+      const desc = DOM.selectors.addTaskModalDescTextarea.value;
+      const priority = DOM.selectors.addTaskModalPrioritySelect.value;
+      const projectId = DOM.selectors.addTaskModalProjectSelect.value;
+      const dueDate = DOM.selectors.addTaskModalDateInput.value;
+      taskManager.addNewTaskToProject(name, projectId, dueDate, desc, priority);
+      DOM.resetModal(modalSelector);
+      DOM.toggleAddTaskModal();
+    }
   });
 };

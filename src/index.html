@@ -147,7 +147,7 @@
       </div>
     </main>
     <!-- Modals -->
-    <!-- 1 Add Task Modal -->
+    <!-- Add Task Modal -->
     <div id="add-task-modal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -199,7 +199,11 @@
                 <label class="form-label" for="add-task__priority-input"
                   >Priority</label
                 >
-                <select class="form-control" id="add-task__priority-select">
+                <select
+                  class="form-control"
+                  id="add-task__priority-select"
+                  required
+                >
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
                   <option value="high">High</option>
@@ -225,7 +229,12 @@
             >
               Close
             </button>
-            <button id="#addTaskBtn" type="button" class="btn btn-primary">
+            <button
+              id="addTaskBtn"
+              type="button"
+              class="btn btn-primary"
+              data-modal-selector="#add-task-modal"
+            >
               Add Task
             </button>
           </div>
@@ -286,7 +295,8 @@
                 >
                 <select
                   class="update-task__project-select form-control"
-                  id="update-task__priority-input"
+                  id="update-task__priority-select"
+                  required
                 >
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
@@ -313,7 +323,12 @@
             >
               Close
             </button>
-            <button id="updateTaskBtn" type="button" class="btn btn-primary">
+            <button
+              id="updateTaskBtn"
+              type="button"
+              class="btn btn-primary"
+              data-modal-selector="#update-task-modal"
+            >
               Save changes
             </button>
           </div>
@@ -344,6 +359,7 @@
                 type="text"
                 id="add-project__name-input"
                 class="form__text-input form-control"
+                required
               />
             </div>
           </div>
@@ -355,7 +371,12 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary" id="#addProjectBtn">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="addProjectBtn"
+              data-modal-selector="#add-project-modal"
+            >
               Save changes
             </button>
           </div>
@@ -386,6 +407,7 @@
                 type="text"
                 id="update-project__name-input"
                 class="form__text-input form-control"
+                required
               />
             </div>
           </div>
@@ -400,7 +422,8 @@
             <button
               type="button"
               class="btn btn-primary"
-              id="#updateProjectBtn"
+              id="updateProjectBtn"
+              data-modal-selector="#update-project-modal"
             >
               Save changes
             </button>

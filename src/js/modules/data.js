@@ -3,12 +3,9 @@ import { isValid } from 'date-fns';
 
 class Storage {
   static getProjects() {
-    console.log(
-      JSON.parse(localStorage.getItem('projects')).map(Project.fromJSON)
-    );
-    return localStorage.getItem('projects')
-      ? JSON.parse(localStorage.getItem('projects')).map(Project.fromJSON)
-      : [];
+    if (JSON.parse(localStorage.getItem('projects')))
+      return JSON.parse(localStorage.getItem('projects')).map(Project.fromJSON);
+    else return [];
   }
 
   static updateProjects(projects) {
@@ -59,7 +56,7 @@ class Task {
       json.title,
       json.desc,
       json.priority,
-      Date.parse(json.dueDate),
+      new Date(json.dueDate),
       json.projectId
     );
     task.id = json.id;

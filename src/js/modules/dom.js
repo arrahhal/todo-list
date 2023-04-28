@@ -144,11 +144,41 @@ export const DOM = (() => {
         (selectors.projectsList.innerHTML += createProjectItem(project))
     );
   };
+  const appendProjectOptionsForSelect = (projects) => {
+    /* append projects for 'add task modal' */
+    selectors.addTaskModalProjectSelect.innerHTML = '';
+    projects.forEach(
+      (project) =>
+        (selectors.addTaskModalProjectSelect.innerHTML += `<option value="${project.id}">${project.title}</option>`)
+    );
+
+    /* append projects for 'update task modal' */
+    selectors.updateTaskModalProjectSelect.innerHTML = '';
+    projects.forEach(
+      (project) =>
+        (selectors.updateTaskModalProjectSelect.innerHTML += `<option value="${project.id}">${project.title}</option>`)
+    );
+  };
+
+  const checkModalValidation = (modalId) => {
+    let validFlag = true;
+    const requiredInputs = document.querySelectorAll(`${modalId} [required]`);
+    requiredInputs.forEach((input) => {
+      if (input.value === '') {
+        input.classList.add('is-invalid');
+        validFlag = false;
+      }
+    });
+    return validFlag;
+  };
   const resetModal = (modalId) => {
     const modalInputs = document.querySelectorAll(
-      `#${modalId} input, #${modalId} select, #${modalId} textarea`
+      `${modalId} input, ${modalId} select, ${modalId} textarea`
     );
-    modalInputs.forEach((input) => (input.value = ''));
+    modalInputs.forEach((input) => {
+      input.value = '';
+      input.classList.remove('is-invalid');
+    });
   };
   const updateTaskFormValues = (task) => {
     const [nameField, dateField, priorityField, projectField, descField] = [
@@ -184,9 +214,11 @@ export const DOM = (() => {
     setTodoTitle,
     toggleAddProjectModal,
     toggleAddTaskModal,
+    checkModalValidation,
     closeModalById,
     createProjectItem,
     appendProjectsList,
+    appendProjectOptionsForSelect,
     resetModal,
     updateTaskFormValues,
   };

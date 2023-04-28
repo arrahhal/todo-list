@@ -5,24 +5,14 @@ let projects = Storage.getProjects();
 
 const addDefaultProjectIfNone = () => {
   if (!projects.length) {
-    const inbox = Project('Inbox');
-    const todayTask = Task(
-      'today Task',
-      'description',
+    const inbox = new Project('Inbox');
+    const todayTask = new Task(
+      'default task',
+      'default description',
       'low',
-      new Date(2023, 3, 26, 10, 15),
+      new Date(2023, 3, 28),
       inbox.id
     );
-    console.log(todayTask);
-    todayTask.update(
-      'new title',
-      'descriptNew',
-      'medium',
-      new Date(2023, 3, 26),
-      inbox.id
-    );
-    //!! there is a issue here the todayTask never updated correctly
-    console.log(todayTask);
     projects.push(inbox);
     inbox.addTask(todayTask);
     _commit();
@@ -181,6 +171,15 @@ const addProject = (title) => {
   _commit();
 };
 
+const createNewTask = (title, desc, priority, dueDate, projectId) =>
+  new Task(title, desc, priority, dueDate, projectId);
+
+const addNewTaskToProject = (title, projectId, dueDate, desc, priority) => {
+  const newTask = createNewTask(title, desc, priority, dueDate, projectId);
+  findProjectById(projectId).addTask(newTask);
+  _commit();
+};
+
 const _commit = () => {
   Storage.updateProjects(projects);
 };
@@ -199,6 +198,7 @@ export const taskManager = {
   getCompletedTasksFunc,
   getProjectTasksFunc,
   addProject,
+  addNewTaskToProject,
   removeProject,
   updateProject,
   getProjects,
