@@ -1,8 +1,9 @@
 import { DOM } from './dom';
+import selectors from './selectors';
 import { taskManager } from './app';
 
 export const initializeListeners = () => {
-  DOM.selectors.filterButtons.forEach((filterBtn) =>
+  selectors.filterButtons.forEach((filterBtn) =>
     filterBtn.addEventListener('click', () => {
       DOM.clearCurrentFocus();
       DOM.setCurrentFocus(filterBtn);
@@ -18,27 +19,27 @@ export const initializeListeners = () => {
       }
     })
   );
-  DOM.selectors.showAddTaskModalButton.addEventListener('click', () => {
+  selectors.showAddTaskModalButton.addEventListener('click', () => {
     DOM.appendProjectOptionsForSelect(taskManager.getProjects());
     DOM.toggleAddTaskModal();
   });
-  DOM.selectors.closeButtons.forEach((btn) =>
+  selectors.closeButtons.forEach((btn) =>
     btn.addEventListener('click', () => {
       const modalId = btn.dataset.close;
       DOM.closeModalById(modalId);
     })
   );
-  DOM.selectors.showAddProjectModalButton.addEventListener('click', () => {
+  selectors.showAddProjectModalButton.addEventListener('click', () => {
     DOM.toggleAddProjectModal();
   });
-  DOM.selectors.addTaskButton.addEventListener('click', () => {
-    const modalSelector = DOM.selectors.addTaskButton.dataset.modalSelector;
+  selectors.addTaskButton.addEventListener('click', () => {
+    const modalSelector = selectors.addTaskButton.dataset.modalSelector;
     if (DOM.checkModalValidation(modalSelector)) {
-      const name = DOM.selectors.addTaskModalNameInput.value;
-      const desc = DOM.selectors.addTaskModalDescTextarea.value;
-      const priority = DOM.selectors.addTaskModalPrioritySelect.value;
-      const projectId = DOM.selectors.addTaskModalProjectSelect.value;
-      const dueDate = DOM.selectors.addTaskModalDateInput.value;
+      const name = selectors.addTaskModalNameInput.value;
+      const desc = selectors.addTaskModalDescTextarea.value;
+      const priority = selectors.addTaskModalPrioritySelect.value;
+      const projectId = selectors.addTaskModalProjectSelect.value;
+      const dueDate = selectors.addTaskModalDateInput.value;
       taskManager.addNewTaskToProject(name, projectId, dueDate, desc, priority);
       DOM.resetModal(modalSelector);
       DOM.toggleAddTaskModal();
