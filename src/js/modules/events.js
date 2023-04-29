@@ -24,11 +24,15 @@ export const initializeListeners = () => {
   document.addEventListener('DOMContentLoaded', () => {
     DOM.appendProjectsList(taskManager.getUserProjects());
     reloadCurrentFocusedProject();
+    DOM.setTodoTitle(
+      document.querySelector('.sidebar__project-item > .is-focused').textContent
+    );
   });
   selectors.filterButtons.forEach((filterBtn) =>
     filterBtn.addEventListener('click', () => {
       DOM.clearCurrentFocus();
       DOM.setCurrentFocus(filterBtn);
+      DOM.setTodoTitle(filterBtn.textContent);
       if (filterBtn.id === 'sidebar__today-btn') {
         const todayTasks = taskManager.getTodayTasksFunc();
         DOM.appendTasksList(todayTasks);
@@ -124,10 +128,12 @@ export const initializeListeners = () => {
     ) {
       DOM.clearCurrentFocus();
       DOM.setCurrentFocus(e.target);
+      DOM.setTodoTitle(e.target.textContent);
       DOM.appendTasksList(taskManager.getProjectTasksFunc(e.target.id));
     } else if (e.target.id === 'sidebar__inbox-btn') {
       DOM.clearCurrentFocus();
       DOM.setCurrentFocus(e.target);
+      DOM.setTodoTitle(e.target.textContent);
       DOM.appendTasksList(taskManager.getInbox().getTasks());
     }
   });

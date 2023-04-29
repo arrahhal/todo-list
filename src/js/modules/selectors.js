@@ -11,7 +11,7 @@ const selectors = {
   projectsToggle: document.getElementById('sidebar__projects-toggle'),
   projectsList: document.getElementById('sidebar__projects-list'),
   tasksList: document.getElementById('todo__tasks-list'),
-  todoTitle: document.getElementById('todo__title'),
+  todoTitle: document.getElementById('todo__project-title'),
   sidebarToggle: document.getElementById('header__sidebar-toggle'),
   sidebar: document.getElementById('sidebar'),
   showAddTaskModalButton: document.getElementById('todo__add-task-modal-btn'),
