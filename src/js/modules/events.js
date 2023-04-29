@@ -2,7 +2,29 @@ import { DOM } from './dom';
 import selectors from './selectors';
 import { taskManager } from './app';
 
+let currentEditTaskId = '';
+
+const reloadCurrentFocusedProject = () => {
+  const currentProject = document.querySelector(
+    '.sidebar__project-item > .is-focused'
+  );
+  if (currentProject.id === 'sidebar__inbox-btn')
+    DOM.appendTasksList(taskManager.getInbox().getTasks());
+  else if (currentProject.id === 'sidebar__today-btn')
+    DOM.appendTasksList(taskManager.getTodayTasksFunc());
+  else if (currentProject.id === 'sidebar__week-btn')
+    DOM.appendTasksList(taskManager.getThisWeekTasksFunc());
+  else if (currentProject.id === 'sidebar__completed-btn')
+    DOM.appendTasksList(taskManager.getCompletedTasksFunc());
+  else if (currentProject.classList.contains('sidebar__project-btn'))
+    DOM.appendTasksList(taskManager.getProjectTasksFunc(currentProject.id));
+};
+
 export const initializeListeners = () => {
+  document.addEventListener('DOMContentLoaded', () => {
+    DOM.appendProjectsList(taskManager.getUserProjects());
+    reloadCurrentFocusedProject();
+  });
   selectors.filterButtons.forEach((filterBtn) =>
     filterBtn.addEventListener('click', () => {
       DOM.clearCurrentFocus();
@@ -40,9 +62,16 @@ export const initializeListeners = () => {
       const priority = selectors.addTaskModalPrioritySelect.value;
       const projectId = selectors.addTaskModalProjectSelect.value;
       const dueDate = selectors.addTaskModalDateInput.value;
-      taskManager.addNewTaskToProject(name, projectId, dueDate, desc, priority);
+      taskManager.addNewTaskToProject(
+        name,
+        projectId,
+        new Date(dueDate),
+        desc,
+        priority
+      );
       DOM.resetModal(modalSelector);
       DOM.toggleAddTaskModal();
+      reloadCurrentFocusedProject();
     }
   });
   selectors.addProjectButton.addEventListener('click', () => {
@@ -50,7 +79,7 @@ export const initializeListeners = () => {
     if (DOM.checkModalValidation(modalSelector)) {
       taskManager.addNewProject(selectors.addProjectModalNameInput.value);
       DOM.resetModal(modalSelector);
-      DOM.toggleAddProjectModal();
+      console.log(taskManager.getUserProjects());
       DOM.appendProjectsList(taskManager.getUserProjects());
     }
   });
@@ -59,5 +88,34 @@ export const initializeListeners = () => {
   });
   selectors.projectsToggle.addEventListener('click', () => {
     DOM.toggleProjectsList();
+  });
+  selectors.tasksList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('task__remove-icon')) {
+      taskManager.removeTaskFunc(e.target.parentElement.dataset.taskId);
+      reloadCurrentFocusedProject();
+    } else if (e.target.classList.contains('task__edit-icon')) {
+      const taskId = e.target.parentElement.dataset.taskId;
+      currentEditTaskId = taskId;
+      DOM.toggleUpdateTaskModal();
+      DOM.appendProjectOptionsForSelect(taskManager.getProjects());
+      DOM.updateTaskFormValues(taskManager.getTaskFunc(taskId));
+    }
+  });
+  selectors.updateTaskButton.addEventListener('click', () => {
+    const newName = selectors.updateTaskModalNameInput.value;
+    const newDesc = selectors.updateTaskModalDescTextarea.value;
+    const newPriority = selectors.updateTaskModalPrioritySelect.value;
+    const newProjectId = selectors.updateTaskModalProjectSelect.value;
+    const newDueDate = selectors.updateTaskModalDateInput.value;
+    taskManager.updateTaskFunc(
+      newName,
+      newDesc,
+      newPriority,
+      new Date(newDueDate),
+      newProjectId,
+      currentEditTaskId
+    );
+    DOM.toggleUpdateTaskModal();
+    reloadCurrentFocusedProject();
   });
 };

@@ -5,7 +5,7 @@ let projects = Storage.getProjects();
 
 const addDefaultProjectIfNone = () => {
   if (!projects.length) {
-    const inbox = new Project('Inbox');
+    const inbox = new Project('Inbox', true);
     const todayTask = new Task(
       'default task',
       'default description',
@@ -118,9 +118,12 @@ const getProjectTasks = (projectId) => {
 
 const getProjects = () => projects;
 
-const getUserProjects = () =>
-  projects.filter((project) => project.title !== 'Inbox');
+const getUserProjects = () => projects.filter((project) => !project.isDefault);
 
+const getInbox = () =>
+  projects.find(
+    (project) => project.isDefault === true && project.title === 'Inbox'
+  );
 const createTaskFunc = (title, desc, priority, dueDate, projectId) => {
   createTask(title, desc, priority, dueDate, projectId);
 };
@@ -206,4 +209,5 @@ export const taskManager = {
   updateProject,
   getProjects,
   getUserProjects,
+  getInbox,
 };

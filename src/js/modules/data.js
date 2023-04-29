@@ -66,10 +66,11 @@ class Task {
 }
 
 class Project {
-  constructor(title) {
+  constructor(title, isDefault = false) {
     this.title = title;
     this.id = uuidv4();
     this.tasks = [];
+    this.isDefault = isDefault;
   }
 
   update(title) {
@@ -92,11 +93,12 @@ class Project {
       title: this.title,
       id: this.id,
       tasks: this.tasks.map((task) => task.toJSON()),
+      isDefault: this.isDefault,
     };
   }
 
   static fromJSON(json) {
-    const project = new Project(json.title);
+    const project = new Project(json.title, Boolean(json.isDefault));
     project.id = json.id;
     project.tasks = json.tasks.map(Task.fromJSON);
     return project;
