@@ -1,0 +1,36 @@
+@use '../abstracts/' as *;
+
+.todo {
+  grid-column: 2 / 3;
+  padding-top: $content-padding-top;
+  margin-inline: clamp(2rem, 3vw, 4rem);
+  transition: all 0.4s ease-in-out;
+}
+.sidebar-is-closed > .todo {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+}
+
+.todo__project-title {
+  color: $clr-neutral-400;
+  font-size: $fs-xl;
+  font-weight: $fw-bold;
+}
+.todo__header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $clr-semi-neutral-400;
+  margin-bottom: 1rem;
+}
+.todo__tasks-list {
+  display: grid;
+  gap: 1rem;
+}
+.todo__container {
+  width: min(100% - 2rem, 60rem);
+  margin-inline: auto;
+}
+.todo__tasks-container {
+  width: min(65rem, 100% - 2rem);
+  margin-inline: auto;
+}

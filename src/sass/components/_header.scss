@@ -1,6 +1,8 @@
 @use '../abstracts/' as *;
+@use '../utilities/' as *;
 
-.header-container {
+.header {
+  grid-area: header;
   position: relative;
   z-index: 9;
   display: flex;
@@ -11,7 +13,7 @@
   font-family: $ff-montserrat;
 }
 
-.logo-container {
+.header__logo-container {
   display: flex;
   align-items: center;
   margin-inline: auto;
@@ -20,8 +22,7 @@
   font-weight: $fw-bold;
 }
 
-.logo-icon {
-  width: 4rem;
-  margin-inline-end: 0.25rem;
-  fill: $clr-neutral-900;
+.header__logo-icon {
+  width: 3rem;
+  text-align: center;
 }

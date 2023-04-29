@@ -1,1 +1,3 @@
-import { uiController } from './ui';
+import { initializeListeners } from './modules/events';
+
+initializeListeners();

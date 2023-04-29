@@ -1,4 +1,5 @@
-.main-container {
+.content {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(15rem, 20rem) 1fr;
 }

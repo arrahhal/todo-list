@@ -1,36 +1,32 @@
 @use '../abstracts/' as *;
 
-.sidebar-container {
+.sidebar {
+  position: relative;
   display: grid;
   grid-auto-rows: min-content;
-  gap: 3rem;
-  width: clamp(15rem, 20vw, 20rem);
-  background-color: #fcf5ee;
+  gap: 4rem;
+  background-color: $clr-neutral-700;
   color: $clr-neutral-100;
   padding-inline: 1rem;
-  padding-block: 3rem;
+  padding-block-start: $content-padding-top;
+  grid-column: 1 / 2;
+  transition: all 0.4s ease-in-out;
 }
-.sidebar-toggle {
-  position: absolute;
-  left: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0;
-  width: 2rem;
-  aspect-ratio: 1;
-  background-image: url('./assets/icons/menu-svgrepo-com.svg');
+.sidebar-is-closed > .sidebar {
+  transform: translateX(-100%);
+  opacity: 0;
 }
-.sidebar-toggle.expanded {
-  background-image: url('./assets/icons/close-svgrepo-com.svg');
-}
-.user-projects-container {
+
+.sidebar__projects-container {
   display: grid;
   grid-template-rows: min-content;
   gap: 1rem;
-}
-.user-project-form {
-  font-size: $fs-sm;
-  color: $clr-neutral-400;
-  display: flex;
-  flex-direction: column;
+  &.is-expanded > .sidebar__projects-list-toggle::after {
+    transform: rotate(180deg);
+    top: 30%;
+  }
+  &.is-expanded > .sidebar__projects-nav {
+    overflow-y: hidden;
+    height: 0;
+  }
 }
