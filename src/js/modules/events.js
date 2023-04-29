@@ -79,7 +79,6 @@ export const initializeListeners = () => {
     if (DOM.checkModalValidation(modalSelector)) {
       taskManager.addNewProject(selectors.addProjectModalNameInput.value);
       DOM.resetModal(modalSelector);
-      console.log(taskManager.getUserProjects());
       DOM.appendProjectsList(taskManager.getUserProjects());
     }
   });
@@ -117,5 +116,19 @@ export const initializeListeners = () => {
     );
     DOM.toggleUpdateTaskModal();
     reloadCurrentFocusedProject();
+  });
+  selectors.sidebar.addEventListener('click', (e) => {
+    if (
+      e.target.classList.contains('sidebar__project-btn') &&
+      e.target.id !== 'sidebar__inbox-btn'
+    ) {
+      DOM.clearCurrentFocus();
+      DOM.setCurrentFocus(e.target);
+      DOM.appendTasksList(taskManager.getProjectTasksFunc(e.target.id));
+    } else if (e.target.id === 'sidebar__inbox-btn') {
+      DOM.clearCurrentFocus();
+      DOM.setCurrentFocus(e.target);
+      DOM.appendTasksList(taskManager.getInbox().getTasks());
+    }
   });
 };
