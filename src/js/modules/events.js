@@ -137,4 +137,8 @@ export const initializeListeners = () => {
       DOM.appendTasksList(taskManager.getInbox().getTasks());
     }
   });
+  selectors.tasksList.addEventListener('change', (e) => {
+    if (e.target.classList.contains('task__checkbox'))
+      taskManager.toggleTaskStatusFunc(e.target.id);
+  });
 };

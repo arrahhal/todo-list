@@ -28,8 +28,8 @@ export const DOM = (() => {
 
   const createCheckbox = (id, label, completed) => {
     return `<div class="task__checkbox-container">
-    <input type="checkbox" id="${id}" class="task__checkbox form-check-input" ${
-      completed ? checked : ''
+      <input type="checkbox" id="${id}" class="task__checkbox form-check-input" ${
+      completed ? 'checked' : ''
     }>
     <label for="${id}" class="task__label">${label}</label>
     </div>`;
@@ -39,7 +39,7 @@ export const DOM = (() => {
     return `
     <li class="task">
       <div class="task__checkbox-group">
-        ${createCheckbox(task.id, task.title, task.completed)}
+        ${createCheckbox(task.id, task.title, task.isCompleted)}
       </div>
       <div class="task__controllers">
         <p class="task__date">${format(task.dueDate, 'yyyy-MM-dd')}</p>
