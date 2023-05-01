@@ -9,221 +9,430 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/2f19e50481.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       rel="shortcut icon"
       href="./assets/icons/favicon.svg"
       type="image/x-icon"
     />
     <link rel="stylesheet" href="./style.css" />
-
     <title>Todo List</title>
   </head>
   <body>
-    <header class="header-container">
-      <button class="sidebar-toggle btn"></button>
-      <div class="logo-container">
-        <svg class="logo-icon" viewBox="0 0 24 24">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M6 4C4.89543 4 4 4.89543 4 6V9C4 10.1046 4.89543 11 6 11H9C10.1046 11 11 10.1046 11 9V6C11 4.89543 10.1046 4 9 4H6ZM6 6H9V9H6V6ZM14 6C13.4477 6 13 6.44772 13 7C13 7.55228 13.4477 8 14 8H19C19.5523 8 20 7.55228 20 7C20 6.44772 19.5523 6 19 6H14ZM14 15C13.4477 15 13 15.4477 13 16C13 16.5523 13.4477 17 14 17H19C19.5523 17 20 16.5523 20 16C20 15.4477 19.5523 15 19 15H14ZM4 15C4 13.8954 4.89543 13 6 13H9C10.1046 13 11 13.8954 11 15V18C11 19.1046 10.1046 20 9 20H6C4.89543 20 4 19.1046 4 18V15ZM9 15H6V18H9V15Z"
-          />
-        </svg>
-        <p class="logo-txt">Do It</p>
+    <header class="header">
+      <button
+        id="header__sidebar-toggle"
+        class="header__sidebar-toggle is-expanded"
+      >
+        <span class="xmark-icon"><i class="fa-solid fa-xmark"></i></span>
+        <span class="bars-icon"><i class="fa-solid fa-bars"></i></span>
+      </button>
+      <div class="header__logo-container">
+        <span class="header__logo-icon"
+          ><i class="fa-solid fa-check-double"></i
+        ></span>
+        <p class="header__logo-txt">Do It</p>
       </div>
     </header>
-    <main class="main-container">
-      <div id="sidebar-container" class="sidebar-container open">
-        <nav class="default-projects">
-          <ul role="list" class="default-projects-list">
-            <li id="inbox-project" class="project" data-id="1">
-              <button class="default-project btn">
+    <main class="content">
+      <!-- the class sidebar-is-closed is used to toggle sidebar -->
+      <div id="sidebar" class="sidebar">
+        <nav class="sidebar__projects-nav">
+          <ul role="list" class="sidebar__filters-list">
+            <li class="sidebar__project-item">
+              <button
+                id="sidebar__inbox-btn"
+                class="sidebar__project-btn is-focused"
+              >
                 <img
-                  class="default-projects-icon"
-                  src="./assets/icons/inbox-svgrepo-com.svg"
-                  alt="Inbox icon"
+                  class="sidebar__project-icon"
+                  src="./assets/icons/inbox.svg"
+                  alt="Inbox"
                 />
                 <p>Inbox</p>
               </button>
             </li>
-            <li id="today-list" class="task-list">
-              <button class="default-project btn">
+            <li class="sidebar__project-item">
+              <button id="sidebar__today-btn" class="sidebar__filter-btn">
                 <img
-                  class="default-projects-icon"
-                  src="./assets/icons/sun-svgrepo-com.svg"
-                  alt="sun icon"
+                  class="sidebar__filter-icon"
+                  src="./assets/icons/sun.svg"
+                  alt="sun"
                 />
                 <p>Today</p>
               </button>
             </li>
-            <li class="task-list" id="week-list">
-              <button class="default-project btn">
+            <li class="sidebar__project-item">
+              <button id="sidebar__week-btn" class="sidebar__filter-btn">
                 <img
-                  class="default-projects-icon"
-                  src="./assets/icons/calendar-check-svgrepo-com.svg"
-                  alt="Calendar icon"
+                  class="sidebar__filter-icon"
+                  src="./assets/icons/calendar.svg"
+                  alt="Calendar"
                 />
                 <p>Week</p>
               </button>
             </li>
-            <li id="completed-list" class="task-list">
-              <button class="default-project btn">
+            <li class="sidebar__project-item">
+              <button id="sidebar__completed-btn" class="sidebar__filter-btn">
                 <img
-                  class="default-projects-icon"
-                  src="./assets/icons/archive-svgrepo-com.svg"
-                  alt="Archive icon"
+                  class="sidebar__filter-icon"
+                  src="./assets/icons/archive.svg"
+                  alt="Archive"
                 />
                 <p>Completed</p>
               </button>
             </li>
           </ul>
         </nav>
-        <div class="user-projects-container">
-          <button class="user-projects-button btn">
+        <div
+          id="sidebar__projects-container"
+          class="sidebar__projects-container"
+        >
+          <button
+            id="sidebar__projects-toggle"
+            class="sidebar__projects-list-toggle is-expanded"
+          >
             <img
-              class="default-projects-icon"
-              src="./assets/icons/folder-svgrepo-com.svg"
+              class="sidebar__project-icon"
+              src="./assets/icons/folder.svg"
               alt="folders"
             />
             <p>Projects list</p>
           </button>
-          <button class="add-project-button btn flex" id="add-user-project">
-            <svg class="add-project-icon" viewBox="0 0 24 24" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-              />
-            </svg>
-          </button>
-          <form
-            id="user-project-form"
-            class="user-project-form display-none"
-            action=""
+          <button
+            class="sidebar__add-project-btn sidebar__add-project-btn--active"
+            id="sidebar__add-project-modal-btn"
+            title="add new project"
           >
-            <label for="new-project-input">Enter project name:</label
-            ><input
-              type="text"
-              name="new-project-title"
-              id="new-project-title"
-            />
-            <button
-              id="submit-project-button"
-              class="submit-project-button btn"
-            >
-              Add
-            </button>
-          </form>
-          <nav class="user-projects-nav expanded">
+            <span class="sidebar__add-project-icon"
+              ><i class="fa-regular fa-plus"></i
+            ></span>
+          </button>
+          <nav class="sidebar__projects-nav is-expanded">
             <ul
               role="list"
-              id="user-projects-list"
-              class="user-projects-list"
+              id="sidebar__projects-list"
+              class="sidebar__project-list"
             ></ul>
           </nav>
         </div>
       </div>
-      <div class="content-container">
-        <div class="content-header-container flex">
-          <h1 id="current-project-title" class="current-project-title"></h1>
+      <div class="todo">
+        <div class="todo__header">
+          <p id="todo__project-title" class="todo__project-title"></p>
           <button
-            id="content-add-task-button"
-            class="content-add-task-button btn flex"
-            title="Add new task"
+            id="todo__add-task-modal-btn"
+            class="todo__add-task-modal-btn btn"
+            title="add new task"
           >
-            <svg class="add-project-icon" viewBox="0 0 24 24" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z"
-              />
-            </svg>
+            <span><i class="fa-regular fa-plus fa-xl"></i></span>
           </button>
         </div>
-        <div class="tasks-container">
+        <div class="todo__tasks-container">
           <nav>
-            <ul
-              id="project-items-list"
-              role="list"
-              class="project-items-list container"
-            ></ul>
+            <ul id="todo__tasks-list" role="list" class="todo__tasks-list">
+              <li class="task">
+                <div class="task__checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="task"
+                    class="task__checkbox form-check-input"
+                  />
+                  <label class="task__label" for="task">Do my homework</label>
+                </div>
+                <div class="task__controllers"></div>
+              </li>
+            </ul>
           </nav>
         </div>
       </div>
     </main>
-    <div id="add-task-screen" class="add-task-screen display-none">
-      <div id="add-task-panel" class="add-task-panel">
-        <p class="add-task-heading">New Task</p>
-        <form class="add-task-from" action="">
-          <div class="input-wrapper">
-            <label for="add-task-title">Title</label>
-            <div class="required">
+    <!-- Modals -->
+    <!-- Add Task Modal -->
+    <div id="add-task-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">New Task</h5>
+            <button
+              type="button"
+              class="btn"
+              data-close="#add-task-modal"
+              aria-label="Close"
+            >
+              <span><i class="fa-solid fa-xmark fa-xl"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form__task-form" action="">
+              <div class="form__input-group">
+                <label class="form-label" for="add-task__name-input"
+                  >Name</label
+                >
+                <input
+                  class="form__name-input form-control"
+                  type="text"
+                  id="add-task__name-input"
+                  required
+                />
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="form__project-select"
+                  >Project</label
+                >
+                <select
+                  class="form-control"
+                  id="add-task__project-select"
+                  required
+                ></select>
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="add-task__duedate-input"
+                  >Date</label
+                >
+                <input
+                  type="date"
+                  id="add-task__duedate-input"
+                  class="form__duedate-input form-control"
+                />
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="add-task__priority-input"
+                  >Priority</label
+                >
+                <select
+                  class="form-control"
+                  id="add-task__priority-select"
+                  required
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <div class="form__input-group form__desc-wrapper">
+                <label class="form-label" for="add-task__desc-textarea"
+                  >Description</label
+                ><textarea
+                  rows="3"
+                  placeholder=""
+                  id="add-task__desc-textarea"
+                  class="form__desc-textarea form-control"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="#add-task-modal"
+            >
+              Close
+            </button>
+            <button
+              id="addTaskBtn"
+              type="button"
+              class="btn btn-primary"
+              data-modal-selector="#add-task-modal"
+            >
+              Add Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Update Task Modal -->
+    <div id="update-task-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update Task</h5>
+            <button
+              type="button"
+              class="btn"
+              data-close="#update-task-modal"
+              aria-label="Close"
+            >
+              <span><i class="fa-solid fa-xmark fa-xl"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form__task-form" action="">
+              <div class="form__input-group">
+                <label class="form-label" for="add-task__name-input"
+                  >Name</label
+                >
+                <input
+                  class="form__name-input form-control"
+                  type="text"
+                  id="update-task__name-input"
+                  required
+                />
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="form__project-select"
+                  >Project</label
+                >
+                <select
+                  class="form-control"
+                  id="update-task__project-select"
+                  required
+                ></select>
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="update-task__duedate-input"
+                  >Date</label
+                >
+                <input
+                  type="date"
+                  id="update-task__duedate-input"
+                  class="form__duedate-input form-control"
+                />
+              </div>
+              <div class="form__input-group">
+                <label class="form-label" for="update-task__priority-input"
+                  >Priority</label
+                >
+                <select
+                  class="update-task__project-select form-control"
+                  id="update-task__priority-select"
+                  required
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <div class="form__input-group form__desc-wrapper">
+                <label class="form-label" for="update-task__desc-textarea"
+                  >Description</label
+                ><textarea
+                  rows="3"
+                  placeholder=""
+                  id="update-task__desc-textarea"
+                  class="form__desc-textarea form-control"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="#update-task-modal"
+            >
+              Close
+            </button>
+            <button
+              id="updateTaskBtn"
+              type="button"
+              class="btn btn-primary"
+              data-modal-selector="#update-task-modal"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add Project Modal -->
+    <div id="add-project-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Project</h5>
+            <button
+              type="button"
+              class="btn"
+              data-close="#add-project-modal"
+              aria-label="Close"
+            >
+              <span><i class="fa-solid fa-close fa-xl"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form__input-group">
+              <label class="form-label" for="add-project__name-input"
+                >Name</label
+              >
               <input
-                class=""
                 type="text"
-                name="add-task-title"
-                id="task-title-input"
+                id="add-project__name-input"
+                class="form__text-input form-control"
+                required
               />
             </div>
           </div>
-          <div class="input-wrapper">
-            <label for="add-task-project">Project</label>
-            <div class="required">
-              <select
-                name="add-task-project"
-                id="task-projects-select"
-                required
-              ></select>
-            </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="#add-project-modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="addProjectBtn"
+              data-modal-selector="#add-project-modal"
+            >
+              Save changes
+            </button>
           </div>
-          <div class="input-wrapper">
-            <label for="add-task-deuDate">Date</label>
-            <div class="required">
+        </div>
+      </div>
+    </div>
+    <!--Update Project Modal -->
+    <div id="udpate-project-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Project</h5>
+            <button
+              type="button"
+              class="btn"
+              data-close="#update-project-modal"
+              aria-label="Close"
+            >
+              <span><i class="fa-solid fa-close fa-xl"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form__input-group">
+              <label class="form-label" for="add-project__name-input"
+                >Name</label
+              >
               <input
-                type="date"
-                name="add-task-deuDate"
-                id="task-date-input"
+                type="text"
+                id="update-project__name-input"
+                class="form__text-input form-control"
                 required
               />
             </div>
           </div>
-          <div class="input-wrapper">
-            <label for="add-task-priority">Priority</label>
-            <div class="required">
-              <select name="add-task-priority" id="task-priority-select">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close="#update-project-modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="updateProjectBtn"
+              data-modal-selector="#update-project-modal"
+            >
+              Save changes
+            </button>
           </div>
-          <div class="input-wrapper desc-wrapper">
-            <label for="add-task-desc">Description</label
-            ><textarea
-              rows="3"
-              placeholder=""
-              id="task-desc-textarea"
-              class="add-task-desc"
-            ></textarea>
-          </div>
-          <button id="close-task-button" class="input-btn remove-task-button">
-            Close
-          </button>
-          <button
-            type="submit"
-            id="add-task-button"
-            class="input-btn add-task-button"
-          >
-            Add
-          </button>
-          <button
-            type="submit"
-            id="update-task-button"
-            class="input-btn add-task-button display-none"
-          >
-            Update
-          </button>
-        </form>
+        </div>
       </div>
     </div>
     <script src="./main.js"></script>
