@@ -29,7 +29,25 @@ To get started with this application, there are two methods:
 git clone https://github.com/rahhaly/todo-list.git
 ```
 
-Then, open `dist/index.html` in your browser.
+Enter the project folder in your terminal:
+
+```bash
+cd todo-list
+```
+
+Then install project dependencies running:
+
+```bash
+npm install
+```
+
+And finally, start the application in your browser by running:
+
+```bash
+npm start
+```
+
+**IMPORTANT NOTE**: you need to have [Node](https://nodejs.org/en/download) installed on your computer in order to use the second method.
 
 ## Contributing
 
