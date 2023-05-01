@@ -2,6 +2,10 @@
 
 This is a simple web application that allows users to create and manage a to-do list.
 
+## Screenshot
+
+![todo list screenshot](./src/assets/screenshot.png)
+
 ## Features
 
 - Create tasks, edit them, remove them, and add them to projects.
