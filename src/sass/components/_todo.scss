@@ -1,4 +1,5 @@
 @use '../abstracts/' as *;
+@use 'sass:map';
 
 .todo {
   grid-column: 2 / 3;
@@ -6,6 +7,13 @@
   margin-inline: clamp(2rem, 3vw, 4rem);
   transition: all 0.4s ease-in-out;
 }
+@media (max-width: map.get($breakpoints, 'lg')) {
+  .todo {
+    grid-column: 1 / 1;
+    grid-row: 2 / 3;
+  }
+}
+
 .sidebar-is-closed > .todo {
   grid-row: 1 / -1;
   grid-column: 1 / -1;

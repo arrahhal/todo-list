@@ -1,4 +1,5 @@
 @use '../abstracts/' as *;
+@use 'sass:map';
 
 .task {
   --task-priority: #316fea;
@@ -13,8 +14,17 @@
   display: flex;
   gap: 1rem;
 }
+.task__checkbox-group {
+  display: flex;
+  align-items: center;
+}
 .task__label {
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .task__checkbox:checked ~ .task__label {
   color: $clr-neutral-400;
@@ -36,6 +46,16 @@
 }
 .task__date {
   font-size: $fs-sm;
+}
+.task__options {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+}
+@media (max-width: map.get($breakpoints, 'sm')) {
+  .task__options {
+    gap: 0.1rem;
+  }
 }
 .task__option-icon {
   width: 1.5rem;

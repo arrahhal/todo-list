@@ -1,5 +1,14 @@
+@use '../abstracts/' as *;
+@use 'sass:map';
+
 .content {
   position: relative;
   display: grid;
   grid-template-columns: minmax(15rem, 20rem) 1fr;
+}
+@media (max-width: map.get($breakpoints, 'lg')) {
+  .content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
 }
