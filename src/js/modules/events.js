@@ -84,6 +84,7 @@ export const initializeListeners = () => {
       taskManager.addNewProject(selectors.addProjectModalNameInput.value);
       DOM.resetModal(modalSelector);
       DOM.appendProjectsList(taskManager.getUserProjects());
+      DOM.toggleAddProjectModal();
     }
   });
   selectors.sidebarToggle.addEventListener('click', () => {
@@ -94,8 +95,10 @@ export const initializeListeners = () => {
   });
   selectors.tasksList.addEventListener('click', (e) => {
     if (e.target.classList.contains('task__remove-icon')) {
-      taskManager.removeTaskFunc(e.target.parentElement.dataset.taskId);
-      reloadCurrentFocusedProject();
+      if (confirm('Are you sure you want to remove this task?')) {
+        taskManager.removeTaskFunc(e.target.parentElement.dataset.taskId);
+        reloadCurrentFocusedProject();
+      }
     } else if (e.target.classList.contains('task__edit-icon')) {
       const taskId = e.target.parentElement.dataset.taskId;
       currentEditTaskId = taskId;

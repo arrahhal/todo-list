@@ -2,8 +2,9 @@
 @use 'sass:map';
 
 .todo {
+  position: relative;
   grid-column: 2 / 3;
-  padding-top: $content-padding-top;
+  padding-block: $content-padding-top;
   margin-inline: clamp(2rem, 3vw, 4rem);
   transition: all 0.4s ease-in-out;
 }

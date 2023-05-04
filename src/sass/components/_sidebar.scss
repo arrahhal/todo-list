@@ -9,8 +9,9 @@
   background-color: $clr-neutral-700;
   color: $clr-neutral-100;
   padding-inline: 1rem;
-  padding-block-start: $content-padding-top;
+  padding-block: $content-padding-top;
   grid-column: 1 / 2;
+  grid-row: 1 / 2;
   transition: all 0.4s ease-in-out;
 }
 .sidebar-is-closed > .sidebar {
@@ -34,7 +35,6 @@
 
 @media (max-width: map.get($breakpoints, 'lg')) {
   .sidebar {
-    grid-row: 1 / 2;
     grid-column: 1 / -1;
   }
 }
