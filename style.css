@@ -48,7 +48,7 @@
 }
 
 .header__sidebar-toggle, .sidebar__project-btn,
-.sidebar__projects-list-toggle, .sidebar__filter-btn, .sidebar__add-project-btn, .todo__add-task-btn, .sidebar__btn {
+.sidebar__projects-list-toggle, .sidebar__user-project-btn, .sidebar__filter-btn, .sidebar__add-project-btn, .todo__add-task-btn, .sidebar__btn {
   display: flex;
   align-items: center;
   border-radius: 4px;
@@ -1732,8 +1732,9 @@ body {
   background-color: #fcf5ee;
   color: #000000;
   padding-inline: 1rem;
-  padding-block-start: 6rem;
+  padding-block: 6rem;
   grid-column: 1/2;
+  grid-row: 1/2;
   transition: all 0.4s ease-in-out;
 }
 
@@ -1758,13 +1759,13 @@ body {
 
 @media (max-width: 1024px) {
   .sidebar {
-    grid-row: 1/2;
     grid-column: 1/-1;
   }
 }
 .todo {
+  position: relative;
   grid-column: 2/3;
-  padding-top: 6rem;
+  padding-block: 6rem;
   margin-inline: clamp(2rem, 3vw, 4rem);
   transition: all 0.4s ease-in-out;
 }
@@ -1810,6 +1811,8 @@ body {
 
 .sidebar__project-icon, .sidebar__filter-icon {
   width: 1.75rem;
+  font-size: 1.5rem;
+  color: hsla(220, 81%, 55%, 0.5);
   margin-inline-end: 1rem;
 }
 
@@ -1856,20 +1859,19 @@ body {
   display: block;
 }
 
-.sidebar__project-btn:hover, .sidebar__filter-btn:hover,
+.sidebar__project-btn:hover, .sidebar__filter-btn:hover, .sidebar__user-project-btn:hover,
 .sidebar__projects-list-toggle:hover {
   background-color: hsla(53, 10%, 69%, 0.2);
-  border: none;
   border-radius: 5px;
 }
 
-.sidebar__project-btn, .sidebar__filter-btn,
+.sidebar__project-btn, .sidebar__filter-btn, .sidebar__user-project-btn,
 .sidebar__projects-list-toggle {
   padding-block: 0.25rem;
   width: 100%;
 }
 
-.sidebar__project-btn.is-focused,
+.sidebar__project-btn.is-focused, .is-focused.sidebar__user-project-btn,
 .sidebar__filter-btn.is-focused {
   background-color: hsla(53, 10%, 69%, 0.2);
 }
@@ -1976,6 +1978,39 @@ body {
   top: 50%;
   right: 10px;
   z-index: 1;
+}
+
+.add-project__icons-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.add-project__icon-radio {
+  display: none;
+}
+
+.add-project__icon-radio:checked + .add-project__icon-label {
+  background-color: #316fea;
+  color: #f2f2f2;
+  border-color: #316fea;
+}
+
+.add-project__icon-label {
+  display: flex;
+  align-items: center;
+  line-height: normal;
+  border: 1px solid #b5b6c0;
+  border-radius: 4px;
+  padding: 0.6rem;
+}
+
+.add-project__icon {
+  font-size: 1.875rem;
+}
+
+.form__project-form {
+  display: grid;
+  gap: 1rem;
 }
 
 .task {

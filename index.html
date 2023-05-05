@@ -23,10 +23,7 @@
   </head>
   <body>
     <header class="header">
-      <button
-        id="header__sidebar-toggle"
-        class="header__sidebar-toggle is-expanded"
-      >
+      <button id="header__sidebar-toggle" class="header__sidebar-toggle">
         <span class="xmark-icon"><i class="fa-solid fa-xmark"></i></span>
         <span class="bars-icon"><i class="fa-solid fa-bars"></i></span>
       </button>
@@ -133,19 +130,7 @@
         </div>
         <div class="todo__tasks-container">
           <nav>
-            <ul id="todo__tasks-list" role="list" class="todo__tasks-list">
-              <li class="task">
-                <div class="task__checkbox-group">
-                  <input
-                    type="checkbox"
-                    id="task"
-                    class="task__checkbox form-check-input"
-                  />
-                  <label class="task__label" for="task">Do my homework</label>
-                </div>
-                <div class="task__controllers"></div>
-              </li>
-            </ul>
+            <ul id="todo__tasks-list" role="list" class="todo__tasks-list"></ul>
           </nav>
         </div>
       </div>
@@ -355,17 +340,84 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="form__input-group">
-              <label class="form-label" for="add-project__name-input"
-                >Name</label
-              >
-              <input
-                type="text"
-                id="add-project__name-input"
-                class="form__text-input form-control"
-                required
-              />
-            </div>
+            <form class="form__project-form">
+              <div>
+                <label class="form-label" for="add-project__name-input"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  id="add-project__name-input"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div>
+                <label class="form-label">Icon</label>
+                <div class="add-project__icons-container">
+                  <div>
+                    <input
+                      type="radio"
+                      name="add-project__icon-radio"
+                      id="add-project__house-radio"
+                      class="add-project__icon-radio"
+                      data-fa-icon="fa-solid fa-house"
+                    /><label
+                      for="add-project__house-radio"
+                      id="add-project__house-label"
+                      class="add-project__icon-label"
+                      ><span class="add-project__icon"
+                        ><i class="fa-solid fa-house"></i></span
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="add-project__icon-radio"
+                      id="add-project__briefcase-radio"
+                      class="add-project__icon-radio"
+                      data-fa-icon="fa-solid fa-briefcase"
+                    /><label
+                      for="add-project__briefcase-radio"
+                      id="add-project__briefcase-label"
+                      class="add-project__icon-label"
+                      ><span class="add-project__icon"
+                        ><i class="fa-solid fa-briefcase"></i></span
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="add-project__icon-radio"
+                      id="add-project__dumbbell-radio"
+                      class="add-project__icon-radio"
+                      data-fa-icon="fa-solid fa-dumbbell"
+                    /><label
+                      for="add-project__dumbbell-radio"
+                      id="add-project__dumbbell-label"
+                      class="add-project__icon-label"
+                      ><span class="add-project__icon"
+                        ><i class="fa-solid fa-dumbbell"></i></span
+                    ></label>
+                  </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="add-project__icon-radio"
+                      id="add-project__gamepad-radio"
+                      class="add-project__icon-radio"
+                      data-fa-icon="fa-solid fa-gamepad"
+                    /><label
+                      for="add-project__gamepad-radio"
+                      id="add-project__gamepad-label"
+                      class="add-project__icon-label"
+                      ><span class="add-project__icon"
+                        ><i class="fa-solid fa-gamepad"></i></span
+                    ></label>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button
