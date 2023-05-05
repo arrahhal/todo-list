@@ -61,6 +61,11 @@ export const DOM = (() => {
     selectors.todoTitle.textContent = title.trim();
   };
 
+  /* get the Fontawesome class from either addProjectModal or UpdateProjectModal*/
+  const getFaClassFromCheckedRadio = (modalSelector) =>
+    document.querySelector(`${modalSelector} input[type=radio]:checked`).dataset
+      .faIcon;
+
   const toggleAddProjectModal = () => {
     selectors.addProjectModal.classList.toggle('is-displayed');
   };
@@ -84,6 +89,7 @@ export const DOM = (() => {
                 class="sidebar__project-btn"
                 id="${project.id}"
               >
+                <span class="sidebar__project-icon"><i class="${project.faIcon}"></i></span>
                 <p>${project.title}</p>
               </button>
             </li>`;
@@ -163,6 +169,7 @@ export const DOM = (() => {
     createTaskItem,
     appendTasksList,
     setTodoTitle,
+    getFaClassFromCheckedRadio,
     toggleAddProjectModal,
     toggleAddTaskModal,
     toggleUpdateTaskModal,

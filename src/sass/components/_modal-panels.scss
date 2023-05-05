@@ -32,3 +32,30 @@
   // transform: translateY(-50%);
   z-index: 1;
 }
+.add-project__icons-container {
+  display: flex;
+  justify-content: space-around;
+}
+.add-project__icon-radio {
+  display: none;
+}
+.add-project__icon-radio:checked + .add-project__icon-label {
+  background-color: $clr-accent;
+  color: $clr-neutral-800;
+  border-color: $clr-accent;
+}
+.add-project__icon-label {
+  display: flex;
+  align-items: center;
+  line-height: normal;
+  border: 1px solid $clr-neutral-500;
+  border-radius: $radius;
+  padding: 0.6rem;
+}
+.add-project__icon {
+  font-size: $fs-lg;
+}
+.form__project-form {
+  display: grid;
+  gap: 1rem;
+}

@@ -5,7 +5,7 @@ let projects = Storage.getProjects();
 
 const addDefaultProjectIfNone = () => {
   if (!projects.length) {
-    const inbox = new Project('Inbox', true);
+    const inbox = new Project('Inbox', '', true);
     const todayTask = new Task(
       'default task',
       'default description',
@@ -171,8 +171,13 @@ const getProjectTasksFunc = (projectId) => {
   return getProjectTasks(projectId);
 };
 
-const addNewProject = (title) => {
-  const project = new Project(title);
+/**
+ *
+ * @param {title} project title
+ * @param {faIcon} FontAwesome icon
+ */
+const addNewProject = (title, faIcon) => {
+  const project = new Project(title, faIcon);
   projects.push(project);
   _commit();
 };

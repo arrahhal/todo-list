@@ -28,7 +28,6 @@
 }
 %sidebar__project-btn--hover:hover {
   background-color: $clr-semi-neutral-400;
-  border: none;
   border-radius: 5px;
 }
 .sidebar__project-btn,
@@ -36,6 +35,9 @@
   @extend %reset-btn, %sidebar__project-btn--hover;
   padding-block: 0.25rem;
   width: 100%;
+}
+.sidebar__user-project-btn {
+  @extend .sidebar__project-btn;
 }
 .sidebar__filter-btn {
   @extend .sidebar__project-btn;

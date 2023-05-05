@@ -66,15 +66,17 @@ class Task {
 }
 
 class Project {
-  constructor(title, isDefault = false) {
+  constructor(title, faIcon, isDefault = false) {
     this.title = title;
+    this.faIcon = faIcon;
     this.id = uuidv4();
     this.tasks = [];
     this.isDefault = isDefault;
   }
 
-  update(title) {
+  update(title, faIcon) {
     this.title = title;
+    this.faIcon = faIcon;
   }
 
   addTask(task) {
@@ -91,6 +93,7 @@ class Project {
   toJSON() {
     return {
       title: this.title,
+      faIcon: this.faIcon,
       id: this.id,
       tasks: this.tasks.map((task) => task.toJSON()),
       isDefault: this.isDefault,
@@ -98,7 +101,11 @@ class Project {
   }
 
   static fromJSON(json) {
-    const project = new Project(json.title, Boolean(json.isDefault));
+    const project = new Project(
+      json.title,
+      json.faIcon,
+      Boolean(json.isDefault)
+    );
     project.id = json.id;
     project.tasks = json.tasks.map(Task.fromJSON);
     return project;
