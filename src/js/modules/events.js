@@ -124,6 +124,7 @@ export const initializeListeners = () => {
       newProjectId,
       currentEditTaskId
     );
+    taskManager.updateProjectsTasks();
     DOM.toggleUpdateTaskModal();
     reloadCurrentFocusedProject();
   });

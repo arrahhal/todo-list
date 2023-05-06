@@ -139,6 +139,15 @@ const updateTaskFunc = (
   updateTask(newTitle, newDesc, newPriority, newDate, newProjectId, taskId);
 };
 
+const updateProjectsTasks = () => {
+  const tasks = getAllTasks();
+  projects.forEach((project) => {
+    project.tasks = [];
+  });
+  tasks.forEach((task) => findProjectById(task.projectId).tasks.push(task));
+  _commit();
+};
+
 const removeTaskFunc = (taskId) => {
   removeTask(taskId);
 };
@@ -200,6 +209,7 @@ addDefaultProjectIfNone();
 export const taskManager = {
   createTaskFunc,
   updateTaskFunc,
+  updateProjectsTasks,
   removeTaskFunc,
   toggleTaskStatusFunc,
   getTaskFunc,
