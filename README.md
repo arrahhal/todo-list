@@ -9,7 +9,7 @@ This is a simple web application that allows users to create and manage a to-do 
 ## Features
 
 - Create tasks, edit them, remove them, and add them to projects.
-- Responsive design for mobile devices (coming soon).
+- Responsive design for mobile devices.
 
 ## Technologies Used
 
@@ -22,7 +22,7 @@ This is a simple web application that allows users to create and manage a to-do 
 
 To get started with this application, there are two methods:
 
-1. Use the live demo: [https://rahhaly.github.io/todo-list](https://rahhaly.github.io/todo-list).
+1. Use the live demo: [https://rahhaly.github.io/todo-list](https://rahhaly.github.io/todo-list) (internet connection needed).
 2. Clone the repository by running the following command in your terminal:
 
 ```bash
